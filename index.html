@@ -342,43 +342,13 @@
     <button onclick="DemoApp.toggleMainButton(this);">Скрыть кнопку</button>
     <!--input type="text" placeholder="Input text in regular input..." id="regular_field"/>
     
-        <li><a href="https://telegram.org/" target="_blank">target="_blank" link</a> (opens outside webview)</li>
         
-        <li><a href="https://t.me/like">LikeBot t.me link</a> (opens inside Telegram app)</li>
-        <li><a href="javascript:Telegram.WebApp.openTelegramLink('https://t.me/vote');">web_app_open_tg_link()</a> (opens inside Telegram app)</li>
-        <li><a href="javascript:Telegram.WebApp.openLink('https://google.com/');">web_app_open_link()</a> (opens outside webview)</li>
-        
-        <li><a href="javascript:Telegram.WebApp.openLink('https://blog.bentelega.ru/tg-web-app-with-stars',{try_instant_view:true});">Цикл уроков по созданию веб приложения для телеграм ({try_instant_view:true})</a> (opens IV inside Telegram app)</li>
+        <li><a href="javascript:Telegram.WebApp.openLink('https://blog.bentelega.ru/tg-web-app-with-stars',{try_instant_view:true});">Цикл уроков по созданию веб приложения для телеграм ({try_instant_view:true})</a> </li>
     </ul>
     
-    <div class="columns">
-        <ul>
-            <li><a href="javascript:;" onclick="alert('Hello!');">alert</a></li>
-            <li><a href="javascript:;" onclick="confirm('Are you sure?');">confirm</a></li>
-            <li><a href="javascript:;" onclick="prompt('How old are you?');">prompt</a></li>
-        </ul>
-        <ul>
-            <li><a href="javascript:;" onclick="DemoApp.showAlert('Hello!');">showAlert</a></li>
-            <li><a href="javascript:;" onclick="DemoApp.showConfirm('Are you sure?');">showConfirm</a></li>
-            <li><a href="javascript:;" onclick="DemoApp.requestWriteAccess();">requestWriteAccess</a></li>
-            <li><a href="javascript:;" onclick="DemoApp.requestContact();">requestContact</a></li>
-            <li><a href="javascript:;" onclick="DemoApp.showPopup();">showPopup</a></li>
-            <li><a href="javascript:;" onclick="DemoApp.showScanQrPopup();">showScanQrPopup</a></li>
-            <li><a href="javascript:;" onclick="DemoApp.showScanQrPopup(true);">showScanQrPopup (links only)</a></li>
-        </ul>
-    </div>
-    <p>Haptics:</p>
-    <ul>
-        <li>Impact: <a href="javascript:Telegram.WebApp.HapticFeedback.impactOccurred('heavy');">heavy</a>, &nbsp; <a href="javascript:Telegram.WebApp.HapticFeedback.impactOccurred('light');">light</a>, &nbsp; <a href="javascript:Telegram.WebApp.HapticFeedback.impactOccurred('medium');">medium</a>, &nbsp; <a href="javascript:Telegram.WebApp.HapticFeedback.impactOccurred('rigid');">rigid</a>, &nbsp; <a href="javascript:Telegram.WebApp.HapticFeedback.impactOccurred('soft');">soft</a><br><br></li>
-        <li>Notification: <a href="javascript:Telegram.WebApp.HapticFeedback.notificationOccurred('error');">error</a>, &nbsp; <a href="javascript:Telegram.WebApp.HapticFeedback.notificationOccurred('success');">success</a>, &nbsp; <a href="javascript:Telegram.WebApp.HapticFeedback.notificationOccurred('warning');">warning</a><br><br></li>
-        <li>Selection: <a href="javascript:Telegram.WebApp.HapticFeedback.selectionChanged();">changed</a><br><br></li>
-    </ul>
-    <pre><code id="webview_data"></code></pre>
-    <div class="hint">
-        Data passed to webview.
-        <span id="webview_data_status" class="status_need">Checking hash...</span>
-    </div>
-    <pre><code id="theme_data"></code></pre>
+    
+        
+    
     <div class="hint">
         Theme params
     </div>
