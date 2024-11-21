@@ -48,12 +48,13 @@
       form {
         display: none;
         text-align: center;
+        margin-top: 100px;
       }
 
       input {
         outline: none;
         border-radius: 5px;
-        border: 2px solid #535353;
+        border: 2px solid #d6d1d1;
         padding: 15px 10px;
         margin: 10px 0 0;
         background: var(--tg-theme-section-separator-color);
@@ -77,8 +78,8 @@
 
     <form class="test-form">
       <input type="text" placeholder="Введите заголовок" class="title-inp" />
-      <input type="text" placeholder="Введите описание" class="desc-inp" />
       <input type="text" placeholder="Введите текст" class="text-inp" />
+  
       <button class="btn s-btn">Отправить</button>
     </form>
 
@@ -97,12 +98,10 @@
 
       sBtn.addEventListener("click", () => {
         let title = document.getElementsByClassName("title-inp")[0];
-        let description = document.getElementsByClassName("desc-inp")[0];
         let text = document.getElementsByClassName("text-inp")[0];
 
         let data = {
           title: title.value,
-          desc: description.value,
           text: text.value,
         };
 
