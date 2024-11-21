@@ -27,7 +27,7 @@ async def start(message: types.Message):
 async def cmd_back_home(message: types.Message) -> None:
 
     webAppInfo = types.WebAppInfo(
-        url="https://probable-capybara-7wqwp99x57gcpv5r-5500.app.github.dev")
+        url="https://bentelega.ru")
     builder = ReplyKeyboardBuilder()
     builder.add(types.KeyboardButton(
         text='Отправить данные', web_app=webAppInfo))
