@@ -15,6 +15,7 @@
 		body {
 			color: var(--tg-theme-text-color);
 			background: var(--tg-theme-bg-color);
+			
 		}
 
 		.Main {
@@ -27,6 +28,11 @@
 		h1 {
 			margin-top: 40px;
 			margin-bottom: 10px;
+			font-family: 'Courier New', Courier, monospace;
+		}
+
+		p {
+			font-family: monospace;
 		}
 
 		img {
@@ -40,11 +46,11 @@
 			margin-top: 50px;
 			height: 60px;
 			width: 200px;
-			font-style: 22px;
-			font-weight: 700;
+			font-size: 17px;
+			font-weight: 500;
 			cursor: pointer;
-			color: var(--tg-theme-button-text-color);
-			background: var(--tg-theme-button-color);
+			color: var(--tg-theme-button-text-color, #ffffff);
+			background: var(--tg-theme-button-color, #1ca8f9);
 		}
 	</style>
 </head>
@@ -53,8 +59,8 @@
 	<div class="Main">
 		<h1>Тестовое Приложение</h1>
 		<img src="static/bot.png" alt="123">
-		<p></p>
-		<button class="btn">Кнопка</button>
+		<p>Веб Приложение для телеги</p>
+		<button class="btn">Нажми меня</button>
 	</div>
 
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
