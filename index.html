@@ -4,8 +4,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Мое Портфолио</title>
+  <title>Разработка веб приложений для телеграм</title>
   <style>
+    /* Стили для нижнего меню */
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--tg-theme-bg-color, #ffffff);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .footer-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--tg-theme-text-color, #222);
+      font-size: 12px;
+      flex: 1;
+    }
+
+    .footer-nav-icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+
+    .footer-nav-btn.active {
+      color: var(--tg-theme-link-color, #2678b6);
+    }
+
     body {
       --bg-color: var(--tg-theme-bg-color, #fff);
       font-family: sans-serif;
@@ -15,6 +49,8 @@
       margin: 0;
       padding: 0;
       color-scheme: var(--tg-color-scheme);
+      padding-bottom: 60px;
+      /* Добавляем отступ для нижнего меню */
     }
 
     body.gray {
@@ -230,7 +266,7 @@
 <body>
   <header>
     <div class="header-container">
-      <div class="logo">Мое Портфолио</div>
+      <div class="logo"></div>
       <!-- <nav>
         <ul>
           <li><a href="#about">Обо мне</a></li>
@@ -242,13 +278,13 @@
   </header>
 
   <section class="hero">
-    <h1>Разработка веб приложений для телеграм</h1>
+    <h1>Веб приложения и боты для телеграм</h1>
     <p></p>
     <a href="#works" class="btn btn-primary">Смотреть примеры</a>
   </section>
 
 
-  <section id="about">
+  <!-- <section id="about">
     <h2>Обо мне</h2>
     <div class="about">
       <div class="about-img">
@@ -259,7 +295,7 @@
         <p>Дополнительная информация, которая может быть интересна потенциальным клиентам или работодателям.</p>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section id="works">
     <h2>Мои работы</h2>
@@ -270,13 +306,39 @@
     </div>
   </section>
 
+  <!-- Нижнее меню -->
+  <nav class="footer-nav">
+    <a href="#home" class="footer-nav-btn" id="nav-catalog">
+      <svg class="footer-nav-icon" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" />
+      </svg>
+      Каталог
+    </a>
+
+    <a href="#home" class="footer-nav-btn active" id="nav-home">
+      <svg class="footer-nav-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+      </svg>
+      Главная
+    </a>
+
+    <a href="#contact" class="footer-nav-btn" id="nav-contacts">
+      <svg class="footer-nav-icon" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 1.99-.9 1.99-2L24 5c0-1.1-.9-2-2-2zM8 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H2v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1zm4-5h-8V9h8v4z" />
+      </svg>
+      Контакты
+    </a>
+  </nav>
 
 
 
 
-  <footer>
+
+  <!-- <footer>
     <p>&copy; 2023 Мое Портфолио. Все права защищены.</p>
-  </footer>
+  </footer> -->
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
