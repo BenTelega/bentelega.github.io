@@ -1,385 +1,388 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Веб апп</title>
-    <style>
-      body {
-        --bg-color: var(--tg-theme-bg-color, #fff);
-        font-family: sans-serif;
-        background-color: var(--bg-color);
-        color: var(--tg-theme-text-color, #222);
-        font-size: 14px;
-        margin: 0;
-        padding: 0;
-        color-scheme: var(--tg-color-scheme);
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мое Портфолио</title>
+  <style>
+    body {
+      --bg-color: var(--tg-theme-bg-color, #fff);
+      font-family: sans-serif;
+      background-color: var(--bg-color);
+      color: var(--tg-theme-text-color, #222);
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      color-scheme: var(--tg-color-scheme);
+    }
+
+    body.gray {
+      background-color: var(--tg-theme-secondary-bg-color, #efefef);
+    }
+
+    a {
+      color: var(--tg-theme-link-color, #2678b6);
+      text-decoration: none;
+    }
+
+    .btn {
+      font-size: 14px;
+      padding: 10px 17px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background-color: var(--tg-theme-button-color, #50a8eb);
+      color: var(--tg-theme-button-text-color, #fff);
+      border: none;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      margin: 15px 0;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--tg-theme-button-color, #50a8eb);
+      color: var(--tg-theme-button-text-color, #ffffff);
+      cursor: pointer;
+    }
+
+    .main-container {
+      padding: 15px;
+    }
+
+    section {
+      padding: 15px;
+      background-color: var(--bg-color, #ffffff);
+    }
+
+    section+section {
+      padding: 15px;
+    }
+
+    /* Стили для портфолио */
+    header {
+      background-color: var(--tg-theme-bg-color, #ffffff);
+      padding: 15px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--tg-theme-link-color, #2678b6);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 15px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 15px 50px;
+      background-color: var(--tg-theme-secondary-bg-color, #efefef);
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .about {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 15px;
+      border: 3px solid var(--tg-theme-button-color, #50a8eb);
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .work-item {
+      background-color: var(--tg-theme-secondary-bg-color, #efefef);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .work-info {
+      padding: 10px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .skill {
+      background-color: var(--tg-theme-button-color, #50a8eb);
+      color: var(--tg-theme-button-text-color, #fff);
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid var(--tg-theme-hint-color, #ccc);
+      border-radius: 4px;
+      background-color: var(--tg-theme-bg-color, #ffffff);
+      color: var(--tg-theme-text-color, #222);
+    }
+
+    .contact-form textarea {
+      height: 100px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links img {
+      width: 30px;
+      height: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: var(--tg-theme-secondary-bg-color, #efefef);
+      font-size: 12px;
+    }
+
+    /* Адаптивность */
+    @media (min-width: 768px) {
+      .works-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      body.gray {
-        background-color: var(--tg-theme-secondary-bg-color, #efefef);
-      }
-
-      a {
-        color: var(--tg-theme-link-color, #2678b6);
-      }
-
-      .btn {
-        font-size: 14px;
-        padding: 10px 17px;
-      }
-
-      .btn-primary {
-        background-color: var(--tg-theme-button-color, #50a8eb);
-        color: var(--tg-theme-button-text-color, #fff);
-        border: none;
-      }
-
-      button {
-        display: block;
-        width: 100%;
-        font-size: 14px;
-        margin: 15px 0;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        background-color: var(--tg-theme-button-color, #50a8eb);
-        color: var(--tg-theme-button-text-color, #ffffff);
-        cursor: pointer;
-      }
-
-      form {
-        display: none;
-        text-align: center;
-      }
-
-      .main-container {
-        padding: 15px;
-      }
-
-      .list-header {
-        text-transform: uppercase;
-        font-size: 0.92em;
-        color: var(--tg-theme-hint-color, #ccc);
-        margin: 0 0 10px;
-      }
-
-      a.list-group-item,
-      button.list-group-item {
-        color: var(--tg-theme-text-color, #222);
-      }
-
-      .main-container p {
-        margin: 0 0 10px;
-      }
-
-      .main-container pre,
-      .main-container > .btn {
-        margin: 0 0 7px;
-      }
-
-      .main-container pre + .hint,
-      .main-container > .btn + .hint {
-        text-align: center;
-        margin: 0 0 15px;
-      }
-
-      button[disabled] {
-        opacity: 0.6;
-        cursor: auto;
-        pointer-events: none;
-      }
-
-      button.close_btn {
-        /*position: fixed;*/
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 0;
-        margin: 0;
-        padding: 16px 20px;
-        text-transform: uppercase;
-      }
-
-      input[type="text"],
-      .input[contenteditable] {
-        display: block;
-        box-sizing: border-box;
-        font-size: 14px;
-        width: 100%;
-        padding: 12px 20px;
-        margin: 15px 0;
-        border: 1px solid var(--tg-theme-link-color, #000);
-        background-color: var(--tg-theme-bg-color, #ffffff);
-        border-radius: 4px;
-        color: var(--tg-theme-text-color, #222222);
-        text-align: start;
-      }
-
-      input[type="text"]::-webkit-input-placeholder {
-        color: var(--tg-theme-hint-color, #ccc);
-      }
-
-      input[type="text"]::-moz-placeholder {
-        color: var(--tg-theme-hint-color, #ccc);
-      }
-
-      input[type="text"]:-ms-input-placeholder {
-        color: var(--tg-theme-hint-color, #ccc);
-      }
-
-      .input[data-placeholder] {
-        position: relative;
-      }
-
-      .input[data-placeholder]:empty:before {
-        position: absolute;
-        left: 0;
-        right: 0;
-        content: attr(data-placeholder);
-        color: var(--tg-theme-hint-color, #ccc);
-        padding: 0 20px;
-        font-weight: normal;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      section {
-        padding: 15px;
-        text-align: center;
-        background-color: var(--bg-color, #ffffff);
-      }
-
-      section#top_sect {
-        background-color: var(--tg-theme-bg-color, #ffffff);
-      }
-
-      section#top_sect.second {
-        background-color: var(--tg-theme-secondary-bg-color, #efefef);
-      }
-
-      section .sect_row {
-        margin: 10px 0;
-      }
-
-      section + section {
-        padding: 0 15px 65px;
-      }
-
-      p {
-        margin: 40px 0 15px;
-      }
-
-      ul {
-        text-align: left;
-      }
-
-      li {
-        color: var(--tg-theme-hint-color, #a8a8a8);
-      }
-
-      textarea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 7px;
-      }
-
-      pre {
-        background: rgba(0, 0, 0, 0.07);
-        color: var(--tg-theme-text-color, #222);
-        font-size: 12px;
-        border: none;
-        border-radius: 4px;
-        padding: 8px;
-        margin: 7px 0;
-        word-break: break-word;
-        white-space: pre-wrap;
-        text-align: left;
-      }
-
-      .dark pre {
-        background: rgba(255, 255, 255, 0.15);
-      }
-
-      .chat_img {
-        width: 30px;
-        border-radius: 15px;
-        margin-right: 10px;
-      }
-
-      .columns {
-        display: flex;
-      }
-
-      .columns > * {
-        flex-grow: 1;
-      }
-
-      .hint {
-        font-size: 0.8em;
-        color: var(--tg-theme-hint-color, #a8a8a8);
-      }
-
-      .ok {
-        color: green;
-      }
-
-      .err {
-        color: red;
-      }
-
-      .status_need {
-        display: none;
-      }
-
-      #fixed_wrap {
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        transform: translateY(100vh);
-      }
-
-      .viewport-container {
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        height: var(--tg-viewport-stable-height, 100vh);
-        transition: height 0.2s ease;
-      }
-
-      .viewport-container .main-container {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
+      .about {
+        flex-direction: row;
         align-items: center;
+        gap: 20px;
       }
 
-      .viewport-container .main-container button {
-        width: auto;
+      .about-img {
+        margin: 0;
       }
+    }
+  </style>
+</head>
 
-      .viewport-border,
-      .viewport-stable_border {
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        height: var(--tg-viewport-height, 100vh);
-        pointer-events: none;
-      }
-
-      .viewport-stable_border {
-        height: var(--tg-viewport-stable-height, 100vh);
-      }
-
-      .viewport-border:before,
-      .viewport-stable_border:before {
-        content: attr(text);
-        display: inline-block;
-        position: absolute;
-        background: gray;
-        right: 0;
-        top: 0;
-        font-size: 7px;
-        padding: 2px 4px;
-        vertical-align: top;
-      }
-
-      .viewport-stable_border:before {
-        //background: red;
-        left: 0;
-        right: auto;
-      }
-
-      .viewport-border:after,
-      .viewport-stable_border:after {
-        content: "";
-        display: block;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        //border: 2px dashed gray;
-      }
-
-      .viewport-stable_border:after {
-        // border-color: green;
-      }
-
-      small {
-        font-size: 12px;
-      }
-
-      img {
-        width: 170px;
-        margin: 30px auto;
-      }
-
-      .cen {
-        padding-top: 300px;
-        height: 700px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px solid black;
-        display: none;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="Main">
-      <section id="top_sect" class="second">
-        <h1>bentelega.ru</h1>
-        <!--img src="static/bot.png" alt="123" /--!>
-
-      </section>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">Мое Портфолио</div>
+      <nav>
+        <ul>
+          <li><a href="#about">Обо мне</a></li>
+          <li><a href="#works">Работы</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+      </nav>
     </div>
-    <!--section class="cen">
-      <form class="test-form">
-        <input type="text" placeholder="Введите заголовок" class="title-inp" />
-        <input type="text" placeholder="Введите текст" class="text-inp" />
+  </header>
 
-        <button class="btn s-btn">Отправить</button>
-      </form>
-  </section-->
+  <section class="hero">
+    <h1>Разработка ботов для телеграмм</h1>
+    <p>--</p>
+    <a href="#works" class="btn btn-primary">Смотреть примеры</a>
+  </section>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <section id="about">
+    <h2>Обо мне</h2>
+    <div class="about">
+      <div class="about-img">
+        <img src="photo.jpg" alt="Мое фото">
+      </div>
+      <div class="about-text">
+        <p>Краткое описание о себе, своем опыте и специализации. Расскажите о своих достижениях и подходах к работе.</p>
+        <p>Дополнительная информация, которая может быть интересна потенциальным клиентам или работодателям.</p>
+      </div>
+    </div>
+  </section>
 
-    <script>
-      let tg = window.Telegram.WebApp;
+  <section id="works">
+    <h2>Мои работы</h2>
+    <div class="works-grid" id="worksContainer">
+      <!-- Работы будут добавлены через JS -->
+    </div>
+  </section>
 
-      let fBtn = document.getElementsByClassName("f-btn")[0];
-      let sBtn = document.getElementsByClassName("s-btn")[0];
+  <section id="skills">
+    <h2>Мои навыки</h2>
+    <div class="skills-list" id="skillsContainer">
+      <!-- Навыки будут добавлены через JS -->
+    </div>
+  </section>
 
-      fBtn.addEventListener("click", () => {
-        document.getElementsByClassName("Main")[0].style.display = "none";
-        document.getElementsByClassName("cen")[0].style.display = "block";
-        document.getElementsByClassName("test-form")[0].style.display = "block";
+  <section id="contact">
+    <h2>Свяжитесь со мной</h2>
+    <form class="contact-form" id="contactForm">
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="email" placeholder="Ваш email" required>
+      <textarea placeholder="Ваше сообщение" required></textarea>
+      <button type="submit" class="btn-primary">Отправить</button>
+    </form>
+    <div class="social-links">
+      <a href="#"><img src="telegram-icon.png" alt="Telegram"></a>
+      <a href="#"><img src="github-icon.png" alt="GitHub"></a>
+      <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Мое Портфолио. Все права защищены.</p>
+  </footer>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    // Инициализация Telegram WebApp
+    const tg = window.Telegram.WebApp;
+    tg.expand(); // Раскрываем приложение на весь экран
+
+    // Данные для портфолио
+    const works = [
+      {
+        title: "Проект 1",
+        description: "Описание проекта 1",
+        image: "work1.jpg",
+        link: "#"
+      },
+      {
+        title: "Проект 2",
+        description: "Описание проекта 2",
+        image: "work2.jpg",
+        link: "#"
+      },
+      {
+        title: "Проект 3",
+        description: "Описание проекта 3",
+        image: "work3.jpg",
+        link: "#"
+      }
+    ];
+
+    const skills = ["HTML", "CSS", "JavaScript", "React", "UI/UX Design", "Figma"];
+
+    // Заполнение работ
+    const worksContainer = document.getElementById('worksContainer');
+    works.forEach(work => {
+      const workItem = document.createElement('div');
+      workItem.className = 'work-item';
+      workItem.innerHTML = `
+          <img src="${work.image}" alt="${work.title}">
+          <div class="work-info">
+            <h3>${work.title}</h3>
+            <p>${work.description}</p>
+            <a href="${work.link}" class="btn btn-primary">Подробнее</a>
+          </div>
+        `;
+      worksContainer.appendChild(workItem);
+    });
+
+    // Заполнение навыков
+    const skillsContainer = document.getElementById('skillsContainer');
+    skills.forEach(skill => {
+      const skillElement = document.createElement('div');
+      skillElement.className = 'skill';
+      skillElement.textContent = skill;
+      skillsContainer.appendChild(skillElement);
+    });
+
+    // Обработка формы
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = {
+        name: this.elements[0].value,
+        email: this.elements[1].value,
+        message: this.elements[2].value
+      };
+
+      // Отправка данных в Telegram бота
+      tg.sendData(JSON.stringify(formData));
+
+      // Очистка формы
+      this.reset();
+
+      // Показываем уведомление
+      tg.showAlert("Спасибо! Ваше сообщение отправлено.");
+    });
+
+    // Плавная прокрутка для навигации
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        window.scrollTo({
+          top: targetElement.offsetTop - 60,
+          behavior: 'smooth'
+        });
       });
+    });
+  </script>
+</body>
 
-      sBtn.addEventListener("click", () => {
-        let title = document.getElementsByClassName("title-inp")[0];
-        let text = document.getElementsByClassName("text-inp")[0];
-
-        let data = {
-          title: title.value,
-          text: text.value,
-        };
-
-        tg.sendData(JSON.stringify(data));
-      });
-    </script>
-  </body>
 </html>
