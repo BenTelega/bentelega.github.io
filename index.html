@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Разработка веб-приложений для Telegram</title>
+  <title>Готовые решения для Telegram</title>
   <style>
     body {
       --bg-color: var(--tg-theme-bg-color, #fff);
@@ -13,7 +12,7 @@
       --button-color: var(--tg-theme-button-color, #50a8eb);
       --button-text-color: var(--tg-theme-button-text-color, #fff);
       --secondary-bg-color: var(--tg-theme-secondary-bg-color, #efefef);
-
+      
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -21,7 +20,6 @@
       margin: 0;
       padding: 0;
       padding-bottom: 70px;
-      /* Отступ для нижнего меню */
       line-height: 1.5;
     }
 
@@ -50,9 +48,7 @@
       margin: 0 auto;
     }
 
-    h1,
-    h2,
-    h3 {
+    h1, h2, h3 {
       color: var(--text-color);
       margin-top: 0;
     }
@@ -111,8 +107,8 @@
       transform: translateY(-2px);
     }
 
-    /* Работы */
-    .works-grid {
+    /* Готовые решения */
+    .solutions-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 20px;
@@ -120,55 +116,39 @@
     }
 
     @media (min-width: 768px) {
-      .works-grid {
+      .solutions-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    .work-item {
+    .solution-item {
       background-color: var(--secondary-bg-color);
       border-radius: 12px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-
-
-    .work-item:hover {
+    .solution-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .work-item img {
+    .solution-item img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
 
-
-    .work-item .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: var(--button-color);
-      color: var(--button-text-color);
-      border-radius: 1px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-
-    .work-info {
+    .solution-info {
       padding: 20px;
     }
 
-    .work-info h3 {
+    .solution-info h3 {
       margin-bottom: 10px;
       font-size: 18px;
     }
 
-    .work-info p {
+    .solution-info p {
       margin-bottom: 15px;
       color: var(--text-color);
       opacity: 0.8;
@@ -222,76 +202,60 @@
 
     /* Анимации */
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .work-item {
+    .solution-item {
       animation: fadeIn 0.5s ease forwards;
     }
 
-    .work-item:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-
-    .work-item:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .work-item:nth-child(3) {
-      animation-delay: 0.3s;
-    }
+    .solution-item:nth-child(1) { animation-delay: 0.1s; }
+    .solution-item:nth-child(2) { animation-delay: 0.2s; }
+    .solution-item:nth-child(3) { animation-delay: 0.3s; }
+    .solution-item:nth-child(4) { animation-delay: 0.4s; }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="logo">Telegram Разработка</div>
+    <div class="logo">Telegram Решения</div>
   </header>
 
   <section class="hero">
-    <h1>Профессиональные веб-приложения и боты для Telegram</h1>
-    <p>Создаю мощные и удобные решения для вашего бизнеса</p>
-    <a href="#works" class="btn">Смотреть примеры работ</a>
+    <h1>Профессиональные решения для Telegram</h1>
+    <p>Готовые к внедрению веб-приложения и боты для вашего бизнеса</p>
+    <a href="#solutions" class="btn">Смотреть решения</a>
   </section>
 
-  <section id="works">
+  <section id="solutions">
     <h2>Готовые решения</h2>
-    <div class="works-grid" id="worksContainer">
-      <!-- Работы будут добавлены через JS -->
+    <div class="solutions-grid" id="solutionsContainer">
+      <!-- Решения будут добавлены через JS -->
     </div>
   </section>
 
   <!-- Нижнее меню -->
   <nav class="footer-nav">
-    <a href="#works" class="footer-nav-btn" id="nav-works">
+    <a href="#solutions" class="footer-nav-btn" id="nav-solutions">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor"
-          d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" />
+        <path fill="currentColor" d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/>
       </svg>
-      Проекты
+      Решения
     </a>
-
+    
     <a href="#" class="footer-nav-btn active" id="nav-home" onclick="scrollToTop()">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
       </svg>
       Главная
     </a>
-
-    <a href="https://t.me/bentelega" class="footer-nav-btn" id="nav-contact" target="_blank">
+    
+    <a href="https://t.me/your_username" class="footer-nav-btn" id="nav-contact" target="_blank">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor"
-          d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8.07,18.28C7.5,17.62 7,16.84 6.54,16C6.21,15.4 6,14.73 6,14C6,12.9 6.9,12 8,12C9.1,12 10,12.9 10,14C10,14.73 9.79,15.4 9.46,16C9,16.84 8.5,17.62 7.93,18.28M12,20C13.73,20 15.21,19.12 16,17.76C15.53,16.75 13.34,16 12,16C10.66,16 8.47,16.75 8,17.76C8.79,19.12 10.27,20 12,20M17,14C18.1,14 19,14.9 19,16C19,16.73 18.79,17.4 18.46,18C18,18.84 17.5,19.62 16.93,20.28C16.5,19.62 16,18.84 15.54,18C15.21,17.4 15,16.73 15,16C15,14.9 15.9,14 17,14M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4Z" />
+        <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8.07,18.28C7.5,17.62 7,16.84 6.54,16C6.21,15.4 6,14.73 6,14C6,12.9 6.9,12 8,12C9.1,12 10,12.9 10,14C10,14.73 9.79,15.4 9.46,16C9,16.84 8.5,17.62 7.93,18.28M12,20C13.73,20 15.21,19.12 16,17.76C15.53,16.75 13.34,16 12,16C10.66,16 8.47,16.75 8,17.76C8.79,19.12 10.27,20 12,20M17,14C18.1,14 19,14.9 19,16C19,16.73 18.79,17.4 18.46,18C18,18.84 17.5,19.62 16.93,20.28C16.5,19.62 16,18.84 15.54,18C15.21,17.4 15,16.73 15,16C15,14.9 15.9,14 17,14M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4Z"/>
       </svg>
-      Написать
+      Контакты
     </a>
   </nav>
 
@@ -300,40 +264,64 @@
     // Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.expand(); // Раскрываем приложение на весь экран
-
-    // Данные для портфолио
-    const works = [
+    
+    // Данные для готовых решений
+    const solutions = [
       {
-        title: "Каталог услуг и товаров",
-        description: "Полноценный интернет-магазин с корзиной и оплатой прямо в Telegram",
-        link: "https://ya.ru"
+        title: "Telegram Магазин PRO",
+        description: "Готовое решение для интернет-торговли с корзиной, каталогом и платежами",
+        image: "https://via.placeholder.com/600x400/50a8eb/ffffff?text=Telegram+Shop",
+        features: ["Каталог товаров", "Корзина", "Онлайн-оплата", "Админ-панель"],
+        price: "от 15 000 ₽"
       },
       {
-        title: "Бот для поддержки и обратной связи клиентов",
-        description: "Система управления клиентами и заказами с уведомлениями",
+        title: "CRM для бизнеса",
+        description: "Комплексное решение для управления клиентами и заказами",
         image: "https://via.placeholder.com/600x400/4CAF50/ffffff?text=CRM+System",
-        link: "#"
+        features: ["Учет клиентов", "История заказов", "Автоуведомления", "Аналитика"],
+        price: "от 20 000 ₽"
       },
-
+      {
+        title: "Обучающая платформа",
+        description: "Готовое решение для онлайн-курсов с уроками и тестированием",
+        image: "https://via.placeholder.com/600x400/FF5722/ffffff?text=Edu+Platform",
+        features: ["Интерактивные уроки", "Тесты", "Прогресс обучения", "Сертификаты"],
+        price: "от 25 000 ₽"
+      },
+      {
+        title: "Игровая платформа",
+        description: "Решение для создания игровых ботов с рейтингами и наградами",
+        image: "https://via.placeholder.com/600x400/9C27B0/ffffff?text=Game+Platform",
+        features: ["Разные игры", "Рейтинги", "Достижения", "Монетизация"],
+        price: "от 18 000 ₽"
+      }
     ];
 
-    // Заполнение работ
-    const worksContainer = document.getElementById('worksContainer');
-    works.forEach((work, index) => {
-      const workItem = document.createElement('div');
-      workItem.className = 'work-item';
-      workItem.innerHTML = `
-        <img src="${work.image}" alt="${work.title}">
-        <div class="work-info">
-          <h3>${work.title}</h3>
-          <p>${work.description}</p>
-          <a href="${work.link}" class="btn">Подробнее</a>
+    // Заполнение решений
+    const solutionsContainer = document.getElementById('solutionsContainer');
+    solutions.forEach((solution, index) => {
+      const solutionItem = document.createElement('div');
+      solutionItem.className = 'solution-item';
+      
+      // Формируем список особенностей
+      const featuresList = solution.features.map(feature => 
+        `<li>${feature}</li>`
+      ).join('');
+      
+      solutionItem.innerHTML = `
+        <img src="${solution.image}" alt="${solution.title}">
+        <div class="solution-info">
+          <h3>${solution.title}</h3>
+          <p>${solution.description}</p>
+          <ul>${featuresList}</ul>
+          <p><strong>${solution.price}</strong></p>
+          <a href="#contact" class="btn">Заказать</a>
         </div>
       `;
-      worksContainer.appendChild(workItem);
-
+      solutionsContainer.appendChild(solutionItem);
+      
       // Добавляем задержку для анимации
-      workItem.style.animationDelay = `${index * 0.1}s`;
+      solutionItem.style.animationDelay = `${index * 0.1}s`;
     });
 
     // Функция прокрутки вверх
@@ -346,7 +334,7 @@
 
     // Обработчики для нижнего меню
     document.querySelectorAll('.footer-nav-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function() {
         document.querySelectorAll('.footer-nav-btn').forEach(b => {
           b.classList.remove('active');
         });
@@ -355,14 +343,14 @@
     });
 
     // Определяем активный раздел при скролле
-    window.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function() {
       const scrollPosition = window.scrollY;
-      const worksSection = document.getElementById('works');
-
+      const solutionsSection = document.getElementById('solutions');
+      
       if (scrollPosition < 100) {
         setActiveNav('nav-home');
-      } else if (scrollPosition < worksSection.offsetTop + worksSection.offsetHeight - 300) {
-        setActiveNav('nav-works');
+      } else if (scrollPosition < solutionsSection.offsetTop + solutionsSection.offsetHeight - 300) {
+        setActiveNav('nav-solutions');
       } else {
         setActiveNav('nav-contact');
       }
@@ -378,7 +366,13 @@
 
     // Инициализация активной кнопки
     setActiveNav('nav-home');
+    
+    // Обработчик для кнопок "Заказать"
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.textContent === 'Заказать') {
+        tg.showAlert(`Вы выбрали: ${e.target.closest('.solution-item').querySelector('h3').textContent}`);
+      }
+    });
   </script>
 </body>
-
 </html>
