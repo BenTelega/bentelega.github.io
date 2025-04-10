@@ -110,6 +110,35 @@
       transform: translateY(-2px);
     }
 
+    /* Фильтры */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      background-color: var(--secondary-bg-color);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      border: none;
+    }
+
+    .filter-btn:hover {
+      background-color: var(--button-color);
+      color: var(--button-text-color);
+    }
+
+    .filter-btn.active {
+      background-color: var(--button-color);
+      color: var(--button-text-color);
+    }
+
     /* Готовые решения */
     .solutions-grid {
       display: grid;
@@ -156,6 +185,45 @@
       color: var(--text-color);
       opacity: 0.8;
       font-size: 14px;
+    }
+
+    .solution-info ul {
+      padding-left: 20px;
+      margin-bottom: 15px;
+      color: var(--text-color);
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    .solution-info li {
+      margin-bottom: 5px;
+    }
+
+    .solution-info strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .solution-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .solution-tag {
+      padding: 4px 10px;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .solution-tag:hover {
+      background-color: var(--button-color);
+      color: var(--button-text-color);
     }
 
     /* Нижнее меню */
@@ -220,6 +288,10 @@
       animation: fadeIn 0.5s ease forwards;
     }
 
+    .solution-item.hidden {
+      display: none;
+    }
+
     .solution-item:nth-child(1) {
       animation-delay: 0.1s;
     }
@@ -240,17 +312,22 @@
 
 <body>
   <header>
-    <div class="logo">Telegram Решения</div>
+    <div class="logo">Профессиональные решения для Telegram</div>
   </header>
 
-  <section class="hero">
-    <h1>Решения для Telegram</h1>
+  <!-- <section class="hero">
+    <h1>Профессиональные решения для Telegram</h1>
     <p>Готовые к внедрению веб-приложения и боты для вашего бизнеса</p>
     <a href="#solutions" class="btn">Смотреть решения</a>
-  </section>
+  </section> -->
 
   <section id="solutions">
     <h2>Готовые решения</h2>
+
+    <div class="filters" id="filtersContainer">
+      <!-- Фильтры будут добавлены через JS -->
+    </div>
+
     <div class="solutions-grid" id="solutionsContainer">
       <!-- Решения будут добавлены через JS -->
     </div>
@@ -258,19 +335,13 @@
 
   <!-- Нижнее меню -->
   <nav class="footer-nav">
-    <a href="#solutions" class="footer-nav-btn" id="nav-solutions">
-      <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor"
-          d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" />
-      </svg>
-      Решения
-    </a>
+
 
     <a href="#" class="footer-nav-btn active" id="nav-home" onclick="scrollToTop()">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
         <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
       </svg>
-      Главная
+      Готовые решения
     </a>
 
     <a href="https://t.me/bentelega" class="footer-nav-btn" id="nav-contact" target="_blank">
@@ -283,8 +354,7 @@
   </nav>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    // Инициализация Telegram WebApp
+  <script>// Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.expand(); // Раскрываем приложение на весь экран
 
@@ -293,42 +363,113 @@
       {
         title: "Telegram Магазин PRO",
         description: "Готовое решение для интернет-торговли с корзиной, каталогом и платежами",
-        image: "",
+        image: "https://via.placeholder.com/600x400/50a8eb/ffffff?text=Telegram+Shop",
         features: ["Каталог товаров", "Корзина", "Онлайн-оплата", "Админ-панель"],
-        price: "от 15 000 ₽"
+        price: "от 15 000 ₽",
+        tags: ["магазин", "платежи", "e-commerce"]
       },
       {
         title: "CRM для бизнеса",
         description: "Комплексное решение для управления клиентами и заказами",
-        image: "",
+        image: "https://via.placeholder.com/600x400/4CAF50/ffffff?text=CRM+System",
         features: ["Учет клиентов", "История заказов", "Автоуведомления", "Аналитика"],
-        price: "от 20 000 ₽"
+        price: "от 20 000 ₽",
+        tags: ["crm", "управление", "аналитика"]
       },
       {
         title: "Обучающая платформа",
         description: "Готовое решение для онлайн-курсов с уроками и тестированием",
-        image: "",
+        image: "https://via.placeholder.com/600x400/FF5722/ffffff?text=Edu+Platform",
         features: ["Интерактивные уроки", "Тесты", "Прогресс обучения", "Сертификаты"],
-        price: "от 25 000 ₽"
+        price: "от 25 000 ₽",
+        tags: ["обучение", "курсы", "образование"]
       },
       {
         title: "Игровая платформа",
         description: "Решение для создания игровых ботов с рейтингами и наградами",
-        image: "",
+        image: "https://via.placeholder.com/600x400/9C27B0/ffffff?text=Game+Platform",
         features: ["Разные игры", "Рейтинги", "Достижения", "Монетизация"],
-        price: "от 18 000 ₽"
+        price: "от 18 000 ₽",
+        tags: ["игры", "развлечения", "монетизация"]
       }
     ];
+
+    // Получаем все уникальные теги
+    const allTags = [...new Set(solutions.flatMap(solution => solution.tags))];
+    let activeFilter = null;
+
+    // Заполнение фильтров
+    const filtersContainer = document.getElementById('filtersContainer');
+
+    // Добавляем кнопку "Все"
+    const allFilterBtn = document.createElement('button');
+    allFilterBtn.className = 'filter-btn active';
+    allFilterBtn.textContent = 'Все';
+    allFilterBtn.addEventListener('click', () => {
+      setActiveFilter(null);
+    });
+    filtersContainer.appendChild(allFilterBtn);
+
+    // Добавляем остальные фильтры
+    allTags.forEach(tag => {
+      const filterBtn = document.createElement('button');
+      filterBtn.className = 'filter-btn';
+      filterBtn.textContent = tag;
+      filterBtn.addEventListener('click', () => {
+        setActiveFilter(tag);
+      });
+      filtersContainer.appendChild(filterBtn);
+    });
+
+    // Функция установки активного фильтра
+    function setActiveFilter(tag) {
+      activeFilter = tag;
+
+      // Обновляем активную кнопку фильтра
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+
+        // Проверяем текст кнопки
+        if ((!tag && btn.textContent === 'Все') ||
+          (tag && btn.textContent === tag)) {
+          btn.classList.add('active');
+        }
+      });
+
+      // Фильтруем решения
+      filterSolutions();
+    }
+
+    // Фильтрация решений
+    function filterSolutions() {
+      const solutionItems = document.querySelectorAll('.solution-item');
+
+      solutionItems.forEach(item => {
+        const itemTags = item.dataset.tags.split(',');
+
+        if (!activeFilter || itemTags.includes(activeFilter)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
 
     // Заполнение решений
     const solutionsContainer = document.getElementById('solutionsContainer');
     solutions.forEach((solution, index) => {
       const solutionItem = document.createElement('div');
       solutionItem.className = 'solution-item';
+      solutionItem.dataset.tags = solution.tags.join(',');
 
       // Формируем список особенностей
       const featuresList = solution.features.map(feature =>
         `<li>${feature}</li>`
+      ).join('');
+
+      // Формируем теги
+      const tagsList = solution.tags.map(tag =>
+        `<span class="solution-tag" data-tag="${tag}">${tag}</span>`
       ).join('');
 
       solutionItem.innerHTML = `
@@ -336,6 +477,7 @@
         <div class="solution-info">
           <h3>${solution.title}</h3>
           <p>${solution.description}</p>
+          <div class="solution-tags">${tagsList}</div>
           <ul>${featuresList}</ul>
           <p><strong>${solution.price}</strong></p>
           <a href="#contact" class="btn">Заказать</a>
@@ -345,6 +487,14 @@
 
       // Добавляем задержку для анимации
       solutionItem.style.animationDelay = `${index * 0.1}s`;
+
+      // Обработчики для тегов
+      solutionItem.querySelectorAll('.solution-tag').forEach(tag => {
+        tag.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setActiveFilter(tag.dataset.tag);
+        });
+      });
     });
 
     // Функция прокрутки вверх
@@ -388,15 +538,7 @@
     }
 
     // Инициализация активной кнопки
-    setActiveNav('nav-home');
-
-    // Обработчик для кнопок "Заказать"
-    document.addEventListener('click', function (e) {
-      if (e.target && e.target.textContent === 'Заказать') {
-        tg.showAlert(`Вы выбрали: ${e.target.closest('.solution-item').querySelector('h3').textContent}`);
-      }
-    });
-  </script>
+    setActiveNav('nav-home');</script>
 </body>
 
 </html>
