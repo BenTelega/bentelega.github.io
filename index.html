@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +13,7 @@
       --button-color: var(--tg-theme-button-color, #50a8eb);
       --button-text-color: var(--tg-theme-button-text-color, #fff);
       --secondary-bg-color: var(--tg-theme-secondary-bg-color, #efefef);
-      
+
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -48,7 +49,9 @@
       margin: 0 auto;
     }
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
       color: var(--text-color);
       margin-top: 0;
     }
@@ -202,18 +205,36 @@
 
     /* Анимации */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .solution-item {
       animation: fadeIn 0.5s ease forwards;
     }
 
-    .solution-item:nth-child(1) { animation-delay: 0.1s; }
-    .solution-item:nth-child(2) { animation-delay: 0.2s; }
-    .solution-item:nth-child(3) { animation-delay: 0.3s; }
-    .solution-item:nth-child(4) { animation-delay: 0.4s; }
+    .solution-item:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .solution-item:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .solution-item:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .solution-item:nth-child(4) {
+      animation-delay: 0.4s;
+    }
   </style>
 </head>
 
@@ -223,7 +244,7 @@
   </header>
 
   <section class="hero">
-    <h1>Профессиональные решения для Telegram</h1>
+    <h1>Решения для Telegram</h1>
     <p>Готовые к внедрению веб-приложения и боты для вашего бизнеса</p>
     <a href="#solutions" class="btn">Смотреть решения</a>
   </section>
@@ -239,21 +260,23 @@
   <nav class="footer-nav">
     <a href="#solutions" class="footer-nav-btn" id="nav-solutions">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/>
+        <path fill="currentColor"
+          d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" />
       </svg>
       Решения
     </a>
-    
+
     <a href="#" class="footer-nav-btn active" id="nav-home" onclick="scrollToTop()">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
+        <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
       </svg>
       Главная
     </a>
-    
+
     <a href="https://t.me/your_username" class="footer-nav-btn" id="nav-contact" target="_blank">
       <svg class="footer-nav-icon" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8.07,18.28C7.5,17.62 7,16.84 6.54,16C6.21,15.4 6,14.73 6,14C6,12.9 6.9,12 8,12C9.1,12 10,12.9 10,14C10,14.73 9.79,15.4 9.46,16C9,16.84 8.5,17.62 7.93,18.28M12,20C13.73,20 15.21,19.12 16,17.76C15.53,16.75 13.34,16 12,16C10.66,16 8.47,16.75 8,17.76C8.79,19.12 10.27,20 12,20M17,14C18.1,14 19,14.9 19,16C19,16.73 18.79,17.4 18.46,18C18,18.84 17.5,19.62 16.93,20.28C16.5,19.62 16,18.84 15.54,18C15.21,17.4 15,16.73 15,16C15,14.9 15.9,14 17,14M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4Z"/>
+        <path fill="currentColor"
+          d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8.07,18.28C7.5,17.62 7,16.84 6.54,16C6.21,15.4 6,14.73 6,14C6,12.9 6.9,12 8,12C9.1,12 10,12.9 10,14C10,14.73 9.79,15.4 9.46,16C9,16.84 8.5,17.62 7.93,18.28M12,20C13.73,20 15.21,19.12 16,17.76C15.53,16.75 13.34,16 12,16C10.66,16 8.47,16.75 8,17.76C8.79,19.12 10.27,20 12,20M17,14C18.1,14 19,14.9 19,16C19,16.73 18.79,17.4 18.46,18C18,18.84 17.5,19.62 16.93,20.28C16.5,19.62 16,18.84 15.54,18C15.21,17.4 15,16.73 15,16C15,14.9 15.9,14 17,14M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4Z" />
       </svg>
       Контакты
     </a>
@@ -264,7 +287,7 @@
     // Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.expand(); // Раскрываем приложение на весь экран
-    
+
     // Данные для готовых решений
     const solutions = [
       {
@@ -302,12 +325,12 @@
     solutions.forEach((solution, index) => {
       const solutionItem = document.createElement('div');
       solutionItem.className = 'solution-item';
-      
+
       // Формируем список особенностей
-      const featuresList = solution.features.map(feature => 
+      const featuresList = solution.features.map(feature =>
         `<li>${feature}</li>`
       ).join('');
-      
+
       solutionItem.innerHTML = `
         <img src="${solution.image}" alt="${solution.title}">
         <div class="solution-info">
@@ -319,7 +342,7 @@
         </div>
       `;
       solutionsContainer.appendChild(solutionItem);
-      
+
       // Добавляем задержку для анимации
       solutionItem.style.animationDelay = `${index * 0.1}s`;
     });
@@ -334,7 +357,7 @@
 
     // Обработчики для нижнего меню
     document.querySelectorAll('.footer-nav-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         document.querySelectorAll('.footer-nav-btn').forEach(b => {
           b.classList.remove('active');
         });
@@ -343,10 +366,10 @@
     });
 
     // Определяем активный раздел при скролле
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       const scrollPosition = window.scrollY;
       const solutionsSection = document.getElementById('solutions');
-      
+
       if (scrollPosition < 100) {
         setActiveNav('nav-home');
       } else if (scrollPosition < solutionsSection.offsetTop + solutionsSection.offsetHeight - 300) {
@@ -366,13 +389,14 @@
 
     // Инициализация активной кнопки
     setActiveNav('nav-home');
-    
+
     // Обработчик для кнопок "Заказать"
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       if (e.target && e.target.textContent === 'Заказать') {
         tg.showAlert(`Вы выбрали: ${e.target.closest('.solution-item').querySelector('h3').textContent}`);
       }
     });
   </script>
 </body>
+
 </html>
