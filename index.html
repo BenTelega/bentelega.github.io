@@ -83,8 +83,8 @@
         <div class="w-12 h-1 bg-tg-button mx-auto mt-2 rounded-full"></div>
       </h2>
 
-      <!-- Фильтры -->
-      <div id="filtersContainer" class="flex flex-wrap justify-center gap-2 mb-6 px-2"></div>
+      <!-- Изменённые фильтры - меньшего размера и без закруглений -->
+      <div id="filtersContainer" class="flex flex-wrap justify-center gap-1 mb-6 px-2"></div>
 
       <!-- Состояние загрузки -->
       <div id="loadingState" class="flex justify-center items-center py-12">
@@ -92,9 +92,8 @@
         <span class="ml-3">Загрузка решений...</span>
       </div>
 
-      <!-- Измененная сетка решений - теперь 4 колонки на больших экранах -->
-      <div id="solutionsContainer" class="grid grid-cols-1 sm:grid-cols-2
-	      lg:grid-cols-3 2xl:grid-cols-4 gap-6 hidden"></div>
+      <!-- Сетка решений -->
+      <div id="solutionsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 hidden"></div>
 
       <!-- Состояние ошибки -->
       <div id="errorState" class="text-center py-12 hidden">
@@ -223,17 +222,17 @@
     function initFilters() {
       filtersContainer.innerHTML = '';
       
-      // Кнопка "Все"
+      // Кнопка "Все" - изменённый стиль
       const allFilterBtn = document.createElement('button');
-      allFilterBtn.className = 'px-4 py-2 rounded-full text-sm transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-button text-tg-buttonText';
+      allFilterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-button text-tg-buttonText';
       allFilterBtn.textContent = 'Все';
       allFilterBtn.addEventListener('click', () => setActiveFilter(null));
       filtersContainer.appendChild(allFilterBtn);
       
-      // Остальные фильтры
+      // Остальные фильтры - изменённый стиль
       allTags.forEach(tag => {
         const filterBtn = document.createElement('button');
-        filterBtn.className = 'px-4 py-2 bg-tg-secondaryBg rounded-full text-sm transition-smooth hover:bg-tg-button hover:text-tg-buttonText';
+        filterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-secondaryBg';
         filterBtn.textContent = tag;
         filterBtn.addEventListener('click', () => setActiveFilter(tag));
         filtersContainer.appendChild(filterBtn);
