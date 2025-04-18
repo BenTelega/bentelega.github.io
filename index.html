@@ -152,10 +152,7 @@
     // Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.expand();
-    tg.BackButton.show();
-    tg.BackButton.onClick(() => {
-      window.history.back();
-    });
+
 
     // Элементы DOM
     const filtersContainer = document.getElementById('filtersContainer');
