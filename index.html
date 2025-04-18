@@ -85,7 +85,7 @@
   </style>
 </head>
 
-<body class="bg-tg-bg text-tg-text pb-[70px]">
+<body class="bg-tg-bg text-tg-text pb-[110px]"> <!-- Увеличили отступ снизу для фильтров -->
   <!-- Модальное окно для деталей решения -->
   <div id="solutionModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal()"></div>
@@ -126,9 +126,6 @@
         Готовые решения
         <div class="w-12 h-1 bg-tg-button mx-auto mt-2 rounded-full"></div>
       </h2>
-
-      <!-- Фильтры -->
-      <div id="filtersContainer" class="flex flex-wrap justify-center gap-1 mb-6 px-2"></div>
 
       <!-- Состояние загрузки -->
       <div id="loadingState" class="flex justify-center items-center py-12">
@@ -177,6 +174,13 @@
     </section>
   </main>
 
+  <!-- Фильтры - перенесены вниз -->
+  <div id="filtersContainer" class="fixed bottom-[70px] left-0 right-0 bg-tg-bg py-3 px-4 border-t border-tg-secondaryBg z-30 shadow-md">
+    <div class="flex flex-wrap justify-center gap-1 overflow-x-auto pb-1">
+      <!-- Фильтры будут добавлены сюда динамически -->
+    </div>
+  </div>
+
   <!-- Нижнее меню -->
   <nav class="fixed bottom-0 left-0 right-0 bg-tg-bg flex justify-around py-3 shadow-lg border-t border-tg-secondaryBg z-40">
     <a href="#" id="nav-home" class="flex flex-col items-center text-tg-button transition-smooth">
@@ -205,7 +209,7 @@
     });
 
     // Элементы DOM
-    const filtersContainer = document.getElementById('filtersContainer');
+    const filtersContainer = document.getElementById('filtersContainer').querySelector('div');
     const solutionsContainer = document.getElementById('solutionsContainer');
     const loadingState = document.getElementById('loadingState');
     const errorState = document.getElementById('errorState');
@@ -321,7 +325,7 @@
       
       // Кнопка "Все"
       const allFilterBtn = document.createElement('button');
-      allFilterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-button text-tg-buttonText';
+      allFilterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-button text-tg-buttonText whitespace-nowrap';
       allFilterBtn.textContent = 'Все';
       allFilterBtn.addEventListener('click', () => setActiveFilter(null));
       filtersContainer.appendChild(allFilterBtn);
@@ -329,7 +333,7 @@
       // Остальные фильтры
       allTags.forEach(tag => {
         const filterBtn = document.createElement('button');
-        filterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-secondaryBg';
+        filterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-secondaryBg whitespace-nowrap';
         filterBtn.textContent = tag;
         filterBtn.addEventListener('click', () => setActiveFilter(tag));
         filtersContainer.appendChild(filterBtn);
