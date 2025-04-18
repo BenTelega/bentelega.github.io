@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Профессиональные готовые решения для Telegram: боты, магазины, CRM системы">
   <title>Готовые решения для Telegram</title>
   <!-- Подключаем Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,36 +21,54 @@
               buttonText: 'var(--tg-theme-button-text-color, #ffffff)',
               secondaryBg: 'var(--tg-theme-secondary-bg-color, #efefef)',
             }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              'from': { opacity: 0, transform: 'translateY(20px)' },
+              'to': { opacity: 1, transform: 'translateY(0)' },
+            }
           }
         }
       }
     }
   </script>
   <style>
-    /* Кастомные анимации */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .solution-image {
+      transition: opacity 0.3s ease;
     }
-    .animate-fade-in {
-      animation: fadeIn 0.5s ease forwards;
-    }
-    
-    /* Стили для ленивой загрузки */
-    .lazy-load {
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .lazy-load.loaded {
+    .solution-image.loaded {
       opacity: 1;
+    }
+    .solution-image:not(.loaded) {
+      opacity: 0;
+    }
+    .transition-smooth {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .loading-spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 3px solid #50a8eb;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 
 <body class="bg-tg-bg text-tg-text pb-[70px]">
   <!-- Шапка -->
-  <header class="bg-tg-bg sticky top-0 z-50 shadow-md py-4 flex justify-center">
-    <div class="text-sm font-bold text-primary">Профессиональные решения для Telegram</div>
+  <header class="bg-tg-bg sticky top-0 z-50 shadow-sm py-4">
+    <div class="container mx-auto px-4">
+      <h1 class="text-center text-lg font-bold text-tg-text">Профессиональные решения для Telegram</h1>
+    </div>
   </header>
 
   <!-- Основной контент -->
@@ -59,34 +77,52 @@
     <section id="solutions" class="py-8">
       <h2 class="text-2xl font-bold text-center mb-6 relative">
         Готовые решения
-        <div class="w-12 h-1 bg-tg-button mx-auto mt-2"></div>
+        <div class="w-12 h-1 bg-tg-button mx-auto mt-2 rounded-full"></div>
       </h2>
 
       <!-- Фильтры -->
-      <div id="filtersContainer" class="flex flex-wrap justify-center gap-2 mb-6"></div>
+      <div id="filtersContainer" class="flex flex-wrap justify-center gap-2 mb-6 px-2"></div>
+
+      <!-- Состояние загрузки -->
+      <div id="loadingState" class="flex justify-center items-center py-12">
+        <div class="loading-spinner"></div>
+        <span class="ml-3">Загрузка решений...</span>
+      </div>
 
       <!-- Сетка решений -->
-      <div id="solutionsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      <div id="solutionsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+
+      <!-- Состояние ошибки -->
+      <div id="errorState" class="text-center py-12 hidden">
+        <svg class="w-12 h-12 mx-auto text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h3 class="text-xl font-medium mt-4">Ошибка загрузки</h3>
+        <p class="text-tg-hint mt-2">Не удалось загрузить список решений</p>
+        <button id="retryButton" class="mt-4 px-6 py-2 bg-tg-button text-tg-buttonText rounded-lg hover:bg-opacity-90 transition-smooth">
+          Попробовать снова
+        </button>
+      </div>
     </section>
 
     <!-- Секция контактов -->
     <section id="contact" class="py-8 border-t border-tg-secondaryBg">
       <h2 class="text-2xl font-bold text-center mb-6 relative">
         Контакты
-        <div class="w-12 h-1 bg-tg-button mx-auto mt-2"></div>
+        <div class="w-12 h-1 bg-tg-button mx-auto mt-2 rounded-full"></div>
       </h2>
       
       <div class="max-w-md mx-auto space-y-4">
-        <a href="https://t.me/bentelega" target="_blank" class="flex items-center p-3 bg-tg-secondaryBg rounded-lg hover:bg-tg-button hover:text-tg-buttonText transition-colors">
-          <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+        <a href="https://t.me/bentelega" target="_blank" class="flex items-center p-4 bg-tg-secondaryBg rounded-lg hover:bg-tg-button hover:text-tg-buttonText transition-smooth">
+          <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.03-.09.06-.42-.06-.59s-.37-.14-.63-.05c-.27.06-4.48 2.79-5.09 3.24-.53.4-1.01.37-1.18.35-.3-.04-.75-.15-1.11-.27-.45-.15-.81-.23-.78-.48.03-.24.27-.34.58-.52.28-.17.68-.42 1.08-.68 1.55-1.04 2.59-1.74 3.93-2.79 1.7-1.32 2.11-2.44 2.35-2.71.21-.24.46-.6.02-.6-.14 0-.29.03-.42.05-.2.03-1.36.45-3.3 1.33-1.19.55-2.26.82-2.72.83-.57.01-1.05-.17-1.37-.3-.56-.23-.99-.37-1-.73 0-.24.25-.5.68-.76 2.18-1.39 4.62-2.37 6.63-2.5.63-.04 1.17.04 1.57.14.5.13 1.09.51 1.01 1.03z"/>
           </svg>
-          <span>Telegram: @bentelega</span>
+          <span class="truncate">Telegram: @bentelega</span>
         </a>
         
-        <div class="p-3 bg-tg-secondaryBg rounded-lg">
-          <p class="text-center">Или напишите нам прямо в Telegram:</p>
-          <button id="contactButton" class="w-full mt-2 py-2 bg-tg-button text-tg-buttonText rounded-lg font-medium">
+        <div class="p-4 bg-tg-secondaryBg rounded-lg">
+          <p class="text-center text-tg-hint mb-3">Или напишите нам прямо в Telegram:</p>
+          <button id="contactButton" class="w-full py-3 bg-tg-button text-tg-buttonText rounded-lg font-medium hover:bg-opacity-90 transition-smooth">
             Написать сообщение
           </button>
         </div>
@@ -96,14 +132,14 @@
 
   <!-- Нижнее меню -->
   <nav class="fixed bottom-0 left-0 right-0 bg-tg-bg flex justify-around py-3 shadow-lg border-t border-tg-secondaryBg z-40">
-    <a href="#" id="nav-home" onclick="scrollToTop()" class="flex flex-col items-center text-tg-button opacity-100 transition-all">
+    <a href="#" id="nav-home" class="flex flex-col items-center text-tg-button transition-smooth">
       <svg class="w-6 h-6 mb-1" viewBox="0 0 24 24" fill="currentColor">
         <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
       </svg>
-      <span class="text-xs">Готовые решения</span>
+      <span class="text-xs">Решения</span>
     </a>
 
-    <a href="#contact" id="nav-contact" class="flex flex-col items-center text-tg-text opacity-70 hover:opacity-100 transition-all">
+    <a href="#contact" id="nav-contact" class="flex flex-col items-center text-tg-hint hover:text-tg-button transition-smooth">
       <svg class="w-6 h-6 mb-1" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8.07,18.28C7.5,17.62 7,16.84 6.54,16C6.21,15.4 6,14.73 6,14C6,12.9 6.9,12 8,12C9.1,12 10,12.9 10,14C10,14.73 9.79,15.4 9.46,16C9,16.84 8.5,17.62 7.93,18.28M12,20C13.73,20 15.21,19.12 16,17.76C15.53,16.75 13.34,16 12,16C10.66,16 8.47,16.75 8,17.76C8.79,19.12 10.27,20 12,20M17,14C18.1,14 19,14.9 19,16C19,16.73 18.79,17.4 18.46,18C18,18.84 17.5,19.62 16.93,20.28C16.5,19.62 16,18.84 15.54,18C15.21,17.4 15,16.73 15,16C15,14.9 15.9,14 17,14M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4Z"/>
       </svg>
@@ -121,64 +157,71 @@
       window.history.back();
     });
 
-    // Данные для готовых решений
-    const solutions = [
-      {
-        title: "Бот обратной связи",
-        description: "Готовое решение для поддержки состоящей из нескольких операторов",
-        image: "https://via.placeholder.com/400x200?text=Бот+обратной+связи",
-        features: ["Утилиты"],
-        price: "3 000 ₽",
-        tags: ["обратная связь"]
-      },
-      {
-        title: "Telegram Магазин PRO",
-        description: "Готовое решение для интернет-торговли с корзиной, каталогом и платежами",
-        image: "https://via.placeholder.com/400x200?text=Telegram+Магазин",
-        features: ["Каталог товаров", "Корзина", "Онлайн-оплата", "Админ-панель"],
-        price: "от 15 000 ₽",
-        tags: ["магазин", "платежи", "e-commerce"]
-      },
-      {
-        title: "CRM для бизнеса",
-        description: "Комплексное решение для управления клиентами и заказами",
-        image: "https://via.placeholder.com/400x200?text=CRM+система",
-        features: ["Учет клиентов", "История заказов", "Автоуведомления", "Аналитика"],
-        price: "от 20 000 ₽",
-        tags: ["crm", "управление", "аналитика"]
-      },
-      {
-        title: "Обучающая платформа",
-        description: "Готовое решение для онлайн-курсов с уроками и тестированием",
-        image: "https://via.placeholder.com/400x200?text=Обучающая+платформа",
-        features: ["Интерактивные уроки", "Тесты", "Прогресс обучения", "Сертификаты"],
-        price: "от 25 000 ₽",
-        tags: ["обучение", "курсы", "образование"]
-      },
-      {
-        title: "Игровая платформа",
-        description: "Решение для создания игровых ботов с рейтингами и наградами",
-        image: "https://via.placeholder.com/400x200?text=Игровая+платформа",
-        features: ["Разные игры", "Рейтинги", "Достижения", "Монетизация"],
-        price: "от 18 000 ₽",
-        tags: ["игры", "развлечения", "монетизация"]
-      }
-    ];
-
-    // Получаем все уникальные теги
-    const allTags = [...new Set(solutions.flatMap(solution => solution.tags))];
-    let activeFilter = null;
-
-    // Инициализация элементов
+    // Элементы DOM
     const filtersContainer = document.getElementById('filtersContainer');
     const solutionsContainer = document.getElementById('solutionsContainer');
+    const loadingState = document.getElementById('loadingState');
+    const errorState = document.getElementById('errorState');
+    const retryButton = document.getElementById('retryButton');
     const contactButton = document.getElementById('contactButton');
+    const navHome = document.getElementById('nav-home');
+    const navContact = document.getElementById('nav-contact');
 
-    // Заполнение фильтров
+    // Состояние приложения
+    let solutions = [];
+    let allTags = [];
+    let activeFilter = null;
+
+    // Загрузка решений из JSON-файла
+    async function loadSolutions() {
+      try {
+        showLoadingState();
+        
+        // Замените на реальный URL вашего JSON-файла
+        const response = await fetch('solutions.json');
+        
+        if (!response.ok) {
+          throw new Error('Не удалось загрузить решения');
+        }
+        
+        solutions = await response.json();
+        allTags = [...new Set(solutions.flatMap(solution => solution.tags))];
+        
+        initFilters();
+        initSolutions();
+        showContentState();
+      } catch (error) {
+        console.error('Ошибка загрузки решений:', error);
+        showErrorState();
+      }
+    }
+
+    // Управление состояниями UI
+    function showLoadingState() {
+      loadingState.classList.remove('hidden');
+      solutionsContainer.classList.add('hidden');
+      errorState.classList.add('hidden');
+    }
+
+    function showContentState() {
+      loadingState.classList.add('hidden');
+      solutionsContainer.classList.remove('hidden');
+      errorState.classList.add('hidden');
+    }
+
+    function showErrorState() {
+      loadingState.classList.add('hidden');
+      solutionsContainer.classList.add('hidden');
+      errorState.classList.remove('hidden');
+    }
+
+    // Инициализация фильтров
     function initFilters() {
+      filtersContainer.innerHTML = '';
+      
       // Кнопка "Все"
       const allFilterBtn = document.createElement('button');
-      allFilterBtn.className = 'px-4 py-2 bg-tg-secondaryBg rounded-full text-sm transition-all hover:bg-tg-button hover:text-tg-buttonText active';
+      allFilterBtn.className = 'px-4 py-2 rounded-full text-sm transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-button text-tg-buttonText';
       allFilterBtn.textContent = 'Все';
       allFilterBtn.addEventListener('click', () => setActiveFilter(null));
       filtersContainer.appendChild(allFilterBtn);
@@ -186,65 +229,111 @@
       // Остальные фильтры
       allTags.forEach(tag => {
         const filterBtn = document.createElement('button');
-        filterBtn.className = 'px-4 py-2 bg-tg-secondaryBg rounded-full text-sm transition-all hover:bg-tg-button hover:text-tg-buttonText';
+        filterBtn.className = 'px-4 py-2 bg-tg-secondaryBg rounded-full text-sm transition-smooth hover:bg-tg-button hover:text-tg-buttonText';
         filterBtn.textContent = tag;
         filterBtn.addEventListener('click', () => setActiveFilter(tag));
         filtersContainer.appendChild(filterBtn);
       });
     }
 
-    // Заполнение решений
+    // Инициализация решений
     function initSolutions() {
       solutionsContainer.innerHTML = '';
+      
       solutions.forEach((solution, index) => {
         const solutionItem = document.createElement('div');
-        solutionItem.className = 'solution-item bg-tg-secondaryBg rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all animate-fade-in hover:scale-[1.02] transform-gpu';
+        solutionItem.className = `solution-item bg-tg-secondaryBg rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-smooth animate-fade-in`;
         solutionItem.dataset.tags = solution.tags.join(',');
         solutionItem.style.animationDelay = `${index * 0.1}s`;
         
         // Формируем теги
         const tagsList = solution.tags.map(tag => 
-          `<span class="solution-tag px-3 py-1 bg-black/10 rounded-full text-xs cursor-pointer transition-all hover:bg-tg-button hover:text-tg-buttonText" data-tag="${tag}">${tag}</span>`
+          `<span class="inline-block px-3 py-1 bg-black/10 rounded-full text-xs cursor-pointer transition-smooth hover:bg-tg-button hover:text-tg-buttonText" data-tag="${tag}">${tag}</span>`
         ).join('');
         
         // Формируем список возможностей
         const featuresList = solution.features.map(feature => 
-          `<li class="mb-1">${feature}</li>`
+          `<li class="mb-1 flex items-start">
+            <svg class="w-4 h-4 mt-0.5 mr-2 flex-shrink-0 text-tg-button" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span>${feature}</span>
+          </li>`
         ).join('');
         
         solutionItem.innerHTML = `
-          <div class="h-40 bg-gray-200 overflow-hidden">
-            <img src="${solution.image}" loading="lazy" alt="${solution.title}" class="w-full h-full object-cover lazy-load" onload="this.classList.add('loaded')">
+          <div class="h-48 bg-gray-100 overflow-hidden relative">
+            <img src="${solution.image}" 
+                 loading="lazy" 
+                 alt="${solution.title}" 
+                 class="w-full h-full object-cover solution-image"
+                 onload="this.classList.add('loaded')">
+            <div class="absolute bottom-2 right-2 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
+              ${solution.price}
+            </div>
           </div>
           <div class="p-5">
             <h3 class="text-lg font-bold mb-2">${solution.title}</h3>
-            <p class="text-sm opacity-80 mb-3">${solution.description}</p>
-            <div class="flex flex-wrap gap-2 mb-3">${tagsList}</div>
-            <ul class="text-sm opacity-80 pl-5 list-disc mb-3">${featuresList}</ul>
-            <p class="font-semibold mb-3">${solution.price}</p>
-            <button class="solution-buy-btn w-full py-2 bg-tg-button text-tg-buttonText text-center rounded-lg hover:opacity-90 transition-all" 
-                    data-price="${solution.price}" data-title="${solution.title}">
-              Заказать
-            </button>
+            <p class="text-sm text-tg-hint mb-3">${solution.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">${tagsList}</div>
+            <ul class="text-sm mb-4 space-y-2">${featuresList}</ul>
+            <div class="flex gap-3">
+              <button class="solution-detail-btn flex-1 py-2 bg-tg-secondaryBg rounded-lg hover:bg-tg-button hover:text-tg-buttonText transition-smooth"
+                      data-id="${solution.id}">
+                Подробнее
+              </button>
+              <button class="solution-buy-btn flex-1 py-2 bg-tg-button text-tg-buttonText rounded-lg hover:bg-opacity-90 transition-smooth" 
+                      data-id="${solution.id}" 
+                      data-price="${solution.price}" 
+                      data-title="${solution.title}">
+                Купить
+              </button>
+            </div>
           </div>
         `;
         
         solutionsContainer.appendChild(solutionItem);
         
         // Обработчики для тегов
-        solutionItem.querySelectorAll('.solution-tag').forEach(tag => {
+        solutionItem.querySelectorAll('[data-tag]').forEach(tag => {
           tag.addEventListener('click', (e) => {
             e.stopPropagation();
             setActiveFilter(tag.dataset.tag);
           });
         });
         
+        // Обработчик для кнопки "Подробнее"
+        solutionItem.querySelector('.solution-detail-btn').addEventListener('click', (e) => {
+          const id = parseInt(e.target.dataset.id);
+          showSolutionDetails(id);
+        });
+        
         // Обработчик для кнопки покупки
         solutionItem.querySelector('.solution-buy-btn').addEventListener('click', (e) => {
           const price = e.target.dataset.price;
           const title = e.target.dataset.title;
-          setupPayment(price, title);
+          const id = parseInt(e.target.dataset.id);
+          setupPayment(id, price, title);
         });
+      });
+    }
+
+    // Показать детали решения
+    function showSolutionDetails(id) {
+      const solution = solutions.find(s => s.id === id);
+      if (!solution) return;
+      
+      tg.showPopup({
+        title: solution.title,
+        message: `${solution.description}\n\n${solution.details}\n\nЦена: ${solution.price}`,
+        buttons: [
+          { id: 'buy', type: 'default', text: 'Купить' },
+          { type: 'cancel' }
+        ]
+      }, (buttonId) => {
+        if (buttonId === 'buy') {
+          setupPayment(solution.id, solution.price, solution.title);
+        }
       });
     }
 
@@ -257,6 +346,8 @@
         btn.classList.remove('bg-tg-button', 'text-tg-buttonText');
         if ((!tag && btn.textContent === 'Все') || (tag && btn.textContent === tag)) {
           btn.classList.add('bg-tg-button', 'text-tg-buttonText');
+        } else {
+          btn.classList.add('bg-tg-secondaryBg');
         }
       });
       
@@ -269,67 +360,106 @@
         const itemTags = item.dataset.tags.split(',');
         const matchesFilter = !activeFilter || itemTags.includes(activeFilter);
         
-        if (matchesFilter) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
+        item.style.display = matchesFilter ? 'block' : 'none';
       });
     }
 
     // Настройка платежей Telegram
-    function setupPayment(price, title) {
-      if (tg.initDataUnsafe?.user?.id) {
-        tg.MainButton.setText(`Купить ${title} за ${price}`);
-        tg.MainButton.show();
-        tg.MainButton.onClick(() => {
-          tg.showInvoice({
-            title: title,
-            description: `Покупка решения "${title}"`,
-            currency: 'RUB',
-            prices: [
-              { label: title, amount: price.replace(/\D/g, '') * 100 }
-            ],
-            payload: JSON.stringify({ 
-              product: title, 
-              userId: tg.initDataUnsafe.user.id 
-            })
-          });
-        });
-      } else {
+    function setupPayment(id, price, title) {
+      if (!tg.initDataUnsafe?.user?.id) {
         tg.showAlert('Для покупки необходимо авторизоваться в Telegram');
+        return;
       }
+      
+      if (!tg.isVersionAtLeast('6.1')) {
+        tg.showAlert('Ваша версия Telegram не поддерживает платежи. Пожалуйста, обновите приложение.');
+        return;
+      }
+      
+      const amount = parseInt(price.replace(/\D/g, '')) * 100;
+      
+      tg.MainButton.setText(`Купить "${title}" за ${price}`);
+      tg.MainButton.show();
+      
+      tg.MainButton.onClick(() => {
+        tg.showInvoice({
+          title: title,
+          description: `Покупка решения "${title}"`,
+          currency: 'RUB',
+          prices: [{ label: title, amount: amount }],
+          payload: JSON.stringify({ 
+            product_id: id,
+            user_id: tg.initDataUnsafe.user.id,
+            timestamp: Date.now()
+          })
+        }, (status) => {
+          if (status === 'paid') {
+            tg.showAlert('Спасибо за покупку! Мы свяжемся с вами в ближайшее время.');
+            tg.MainButton.hide();
+          }
+        });
+      });
     }
-
-    // Обработчик кнопки контактов
-    contactButton.addEventListener('click', () => {
-      tg.openTelegramLink('https://t.me/bentelega');
-    });
 
     // Прокрутка вверх
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveNav('home');
     }
 
-    // Инициализация
+    // Установка активного пункта навигации
+    function setActiveNav(section) {
+      if (section === 'home') {
+        navHome.classList.add('text-tg-button');
+        navHome.classList.remove('text-tg-hint');
+        navContact.classList.add('text-tg-hint');
+        navContact.classList.remove('text-tg-button');
+      } else {
+        navContact.classList.add('text-tg-button');
+        navContact.classList.remove('text-tg-hint');
+        navHome.classList.add('text-tg-hint');
+        navHome.classList.remove('text-tg-button');
+      }
+    }
+
+    // Инициализация при загрузке
     document.addEventListener('DOMContentLoaded', () => {
-      initFilters();
-      initSolutions();
+      // Обработчики событий
+      contactButton.addEventListener('click', () => {
+        tg.openTelegramLink('https://t.me/bentelega');
+      });
+
+      retryButton.addEventListener('click', loadSolutions);
+
+      navHome.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToTop();
+        setActiveNav('home');
+      });
+
+      navContact.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        setActiveNav('contact');
+      });
+
+      // Отслеживаем скролл для подсветки навигации
+      window.addEventListener('scroll', () => {
+        const contactSection = document.getElementById('contact');
+        const contactPosition = contactSection.getBoundingClientRect().top;
+        
+        if (contactPosition < window.innerHeight / 2) {
+          setActiveNav('contact');
+        } else {
+          setActiveNav('home');
+        }
+      });
+
+      // Загружаем решения
+      loadSolutions();
       
       // Скрываем MainButton по умолчанию
       tg.MainButton.hide();
-    });
-
-    // Обработчики для нижнего меню
-    document.querySelectorAll('nav a').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('nav a').forEach(b => {
-          b.classList.remove('text-tg-button', 'opacity-100');
-          b.classList.add('opacity-70');
-        });
-        this.classList.add('text-tg-button', 'opacity-100');
-        this.classList.remove('opacity-70');
-      });
     });
   </script>
 </body>
