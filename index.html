@@ -63,12 +63,56 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    /* Анимация для модального окна */
+    .modal-enter {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    .modal-enter-active {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 200ms, transform 200ms;
+    }
+    .modal-exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .modal-exit-active {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 200ms, transform 200ms;
+    }
   </style>
 </head>
 
 <body class="bg-tg-bg text-tg-text pb-[70px]">
+  <!-- Модальное окно для деталей решения -->
+  <div id="solutionModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal()"></div>
+    
+    <div class="relative bg-tg-bg rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl transform transition-all">
+      <button class="absolute top-4 right-4 p-1 rounded-full hover:bg-tg-secondaryBg" onclick="closeModal()">
+        <svg class="w-6 h-6 text-tg-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <div class="p-6">
+        <div id="modalImage" class="h-64 bg-gray-100 rounded-lg mb-4 overflow-hidden"></div>
+        <h3 id="modalTitle" class="text-2xl font-bold mb-2"></h3>
+        <p id="modalDescription" class="text-tg-hint mb-4"></p>
+        <div id="modalTags" class="flex flex-wrap gap-2 mb-4"></div>
+        <div id="modalPrice" class="text-xl font-semibold mb-4"></div>
+        <div id="modalDetails" class="prose prose-sm max-w-none text-tg-text mb-6"></div>
+        <button id="modalBuyButton" class="w-full py-3 bg-tg-button text-tg-buttonText rounded-lg font-medium hover:bg-opacity-90 transition-smooth">
+          Купить
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Шапка -->
-  <header class="bg-tg-bg sticky top-0 z-50 shadow-sm py-4">
+  <header class="bg-tg-bg sticky top-0 z-40 shadow-sm py-4">
     <div class="container mx-auto px-4">
       <h1 class="text-center text-lg font-bold text-tg-text">Профессиональные решения для Telegram</h1>
     </div>
@@ -83,7 +127,7 @@
         <div class="w-12 h-1 bg-tg-button mx-auto mt-2 rounded-full"></div>
       </h2>
 
-      <!-- Изменённые фильтры - меньшего размера и без закруглений -->
+      <!-- Фильтры -->
       <div id="filtersContainer" class="flex flex-wrap justify-center gap-1 mb-6 px-2"></div>
 
       <!-- Состояние загрузки -->
@@ -169,25 +213,78 @@
     const contactButton = document.getElementById('contactButton');
     const navHome = document.getElementById('nav-home');
     const navContact = document.getElementById('nav-contact');
+    
+    // Элементы модального окна
+    const solutionModal = document.getElementById('solutionModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalTags = document.getElementById('modalTags');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDetails = document.getElementById('modalDetails');
+    const modalBuyButton = document.getElementById('modalBuyButton');
 
     // Состояние приложения
     let solutions = [];
     let allTags = [];
     let activeFilter = null;
+    let currentSolution = null;
 
-    // Загрузка решений из JSON-файла
+    // URL для загрузки решений
+    const SOLUTIONS_URL = 'https://raw.githubusercontent.com/BenTelega/bentelega.github.io/main/solutions.json';
+
+    // Функции для работы с модальным окном
+    function openModal(solution) {
+      currentSolution = solution;
+      
+      // Заполняем модальное окно данными
+      modalImage.innerHTML = `<img src="${solution.image}" class="w-full h-full object-cover" loading="lazy" alt="${solution.title}">`;
+      modalTitle.textContent = solution.title;
+      modalDescription.textContent = solution.description;
+      
+      // Очищаем и добавляем теги
+      modalTags.innerHTML = '';
+      solution.tags.forEach(tag => {
+        const tagElement = document.createElement('span');
+        tagElement.className = 'px-3 py-1 bg-black/10 rounded-full text-xs';
+        tagElement.textContent = tag;
+        modalTags.appendChild(tagElement);
+      });
+      
+      modalPrice.textContent = solution.price;
+      modalDetails.innerHTML = solution.details;
+      
+      // Показываем модальное окно
+      solutionModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      solutionModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      currentSolution = null;
+    }
+
+    // Загрузка решений из GitHub
     async function loadSolutions() {
       try {
         showLoadingState();
         
-        // Замените на реальный URL вашего JSON-файла
-        const response = await fetch('solutions.json');
+        // Добавляем timestamp к URL для избежания кеширования
+        const url = `${SOLUTIONS_URL}?t=${Date.now()}`;
+        const response = await fetch(url);
         
         if (!response.ok) {
-          throw new Error('Не удалось загрузить решения');
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         solutions = await response.json();
+        
+        // Проверяем, что получили массив
+        if (!Array.isArray(solutions)) {
+          throw new Error('Invalid data format: expected array');
+        }
+        
         allTags = [...new Set(solutions.flatMap(solution => solution.tags))];
         
         initFilters();
@@ -222,14 +319,14 @@
     function initFilters() {
       filtersContainer.innerHTML = '';
       
-      // Кнопка "Все" - изменённый стиль
+      // Кнопка "Все"
       const allFilterBtn = document.createElement('button');
       allFilterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-button text-tg-buttonText';
       allFilterBtn.textContent = 'Все';
       allFilterBtn.addEventListener('click', () => setActiveFilter(null));
       filtersContainer.appendChild(allFilterBtn);
       
-      // Остальные фильтры - изменённый стиль
+      // Остальные фильтры
       allTags.forEach(tag => {
         const filterBtn = document.createElement('button');
         filterBtn.className = 'px-3 py-1 text-xs transition-smooth hover:bg-tg-button hover:text-tg-buttonText bg-tg-secondaryBg';
@@ -305,10 +402,13 @@
           });
         });
         
-        // Обработчик для кнопки "Подробнее"
+        // Обработчик для кнопки "Подробнее" - теперь открывает модальное окно
         solutionItem.querySelector('.solution-detail-btn').addEventListener('click', (e) => {
           const id = parseInt(e.target.dataset.id);
-          showSolutionDetails(id);
+          const solution = solutions.find(s => s.id === id);
+          if (solution) {
+            openModal(solution);
+          }
         });
         
         // Обработчик для кнопки покупки
@@ -319,23 +419,12 @@
           setupPayment(id, price, title);
         });
       });
-    }
-
-    // Показать детали решения
-    function showSolutionDetails(id) {
-      const solution = solutions.find(s => s.id === id);
-      if (!solution) return;
       
-      tg.showPopup({
-        title: solution.title,
-        message: `${solution.description}\n\n${solution.details}\n\nЦена: ${solution.price}`,
-        buttons: [
-          { id: 'buy', type: 'default', text: 'Купить' },
-          { type: 'cancel' }
-        ]
-      }, (buttonId) => {
-        if (buttonId === 'buy') {
-          setupPayment(solution.id, solution.price, solution.title);
+      // Обработчик для кнопки покупки в модальном окне
+      modalBuyButton.addEventListener('click', () => {
+        if (currentSolution) {
+          setupPayment(currentSolution.id, currentSolution.price, currentSolution.title);
+          closeModal();
         }
       });
     }
