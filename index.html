@@ -6,43 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Портфолио разработчика Telegram ботов</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./tailwind-config.js"></script>
+  <script>
+    tailwind.config = window.tailwindConfig;
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              light: '#c44569',
-              dark: '#546de5'
-            },
-            primaryDark: {
-              light: '#006699',
-              dark: '#0077cc'
-            },
-            secondary: {
-              light: '#f8f9fa',
-              dark: '#303952'
-            },
-            dark: {
-              light: '#212529',
-              dark: '#e1e1e1'
-            },
-            light: {
-              light: '#ffffff',
-              dark: '#2d2d2d'
-            }
-          },
-          fontFamily: {
-            'roboto-slab': ['Roboto Slab', 'serif'],
-          },
-        }
-      }
-    }
-  </script>
   <style type="text/tailwindcss">
     @layer components {
             .project-card {
@@ -58,7 +28,7 @@
                 @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
             }
             .btn {
-                @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px] font-roboto-slab;
+                @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px];
             }
         }
     </style>
@@ -96,8 +66,14 @@
 
   <section class="container mx-auto px-5 py-8">
     <h2 class="text-2xl font-semibold mb-8 text-primary-light dark:text-primary-dark font-roboto-slab">Мои проекты</h2>
-    <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- Карточки проектов будут загружены сюда -->
+      <div class="text-center py-8 col-span-full">
+        <div
+          class="animate-spin inline-block w-8 h-8 border-4 border-primary-light dark:border-primary-dark rounded-full border-t-transparent">
+        </div>
+        <p class="mt-2">Загрузка проектов...</p>
+      </div>
     </div>
   </section>
 
@@ -141,20 +117,36 @@
   </footer>
 
   <script>
+    // URL для загрузки проектов
+    const PROJECTS_URL = 'https://raw.githubusercontent.com/BenTelega/bentelega.github.io/main/works.json';
+
     // Функция для загрузки и отображения проектов
     async function loadProjects() {
+      const container = document.getElementById('projects-container');
+
       try {
-        const response = await fetch('works.json');
+        const response = await fetch(PROJECTS_URL);
         if (!response.ok) {
-          throw new Error('Не удалось загрузить проекты');
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const projects = await response.json();
+
+        if (!projects || projects.length === 0) {
+          container.innerHTML = `
+                        <div class="col-span-full text-center py-8">
+                            <p>Нет доступных проектов</p>
+                        </div>
+                    `;
+          return;
+        }
+
         displayProjects(projects);
       } catch (error) {
         console.error('Ошибка загрузки проектов:', error);
-        document.getElementById('projects-container').innerHTML = `
+        container.innerHTML = `
                     <div class="col-span-full text-center py-8">
                         <p class="text-red-500">Не удалось загрузить проекты. Пожалуйста, попробуйте позже.</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">${error.message}</p>
                     </div>
                 `;
       }
@@ -163,15 +155,6 @@
     // Функция для отображения проектов
     function displayProjects(projects) {
       const container = document.getElementById('projects-container');
-
-      if (!projects || projects.length === 0) {
-        container.innerHTML = `
-                    <div class="col-span-full text-center py-8">
-                        <p>Проекты не найдены</p>
-                    </div>
-                `;
-        return;
-      }
 
       container.innerHTML = projects.map(project => `
                 <div class="project-card">
@@ -186,7 +169,7 @@
                         <p class="text-gray-600 dark:text-gray-300 mb-3 text-sm">
                             ${project.description}
                         </p>
-                        <p class="text-sm mb-3"><strong>Технологии:</strong> ${project.tools.join(', ')}</p>
+                        <p class="text-sm mb-3"><strong>Технологии:</strong> ${Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}</p>
                         <a href="#" class="btn text-sm">Подробнее</a>
                     </div>
                 </div>
