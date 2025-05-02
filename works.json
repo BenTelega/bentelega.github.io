@@ -3,7 +3,7 @@
         "id": 1,
         "title": "Магазин в Telegram",
         "description": "Полноценный интернет-магазин с корзиной, оплатой и историей заказов. Интеграция с 1С и CRM.",
-        "image": "/static/market.png",
+        "image": "/static/market.jpg",
         "tools": ["Python", "aiogram", "PostgreSQL"]
     },
     {
