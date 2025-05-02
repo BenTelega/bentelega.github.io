@@ -20,13 +20,13 @@
   <style type="text/tailwindcss">
     @layer components {
       .project-card {
-        @apply bg-light-light dark:bg-light-dark rounded-sm overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1;
+        @apply bg-light-light dark:bg-light-dark rounded-lg overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1;
       }
       .project-img-container {
         @apply h-48 w-full bg-gray-300 dark:bg-gray-700 relative overflow-hidden;
       }
       .project-img-overlay {
-        @apply absolute inset-0 bg-gradient-to-br from-primary-light/60 to-primaryDark-light/80 dark:from-primary-dark/60 dark:to-primaryDark-dark/80 mix-blend-multiply transition-opacity duration-300 hover:opacity-80;
+        @apply absolute inset-0 bg-gradient-to-br from-primary-light/60 to-primaryDark-light/80 dark:from-primary-dark/20 dark:to-primaryDark-dark/80 mix-blend-multiply transition-opacity duration-300 hover:opacity-80;
       }
       .skill {
         @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
