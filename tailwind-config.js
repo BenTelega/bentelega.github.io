@@ -6,15 +6,15 @@ window.tailwindConfig = {
       colors: {
         primary: {
           light: "#2a9d8f",
-          dark: "#264653",
+          dark: "#82589F",
         },
         primaryDark: {
           light: "#006699",
           dark: "#0077cc",
         },
         secondary: {
-          light: "#fefae0",
-          dark: "#264653",
+          light: "#f8f9fa",
+          dark: "#2f3640",
         },
         dark: {
           light: "#212529",

@@ -1,8 +1,19 @@
-[
-    {
-        "name": "BenTelega",
-        "title": "Разработчик Telegram ботов",
-        "about": "Я профессиональный разработчик Telegram ботов с 5-летним опытом. Создаю эффективные, масштабируемые и удобные боты для бизнеса и личного использования. ",
-        "tools": "Связаться со мной"
+{
+    "profile": {
+      "skills": ["Python", "Aiogram", "Node.js", "Telegraf", "MongoDB", "FastAPI"],
+      "contacts": [
+        {
+          "title": "Telegram",
+          "link": "https://t.me/bentelega"
+        },
+        {
+          "title": "GitHub",
+          "link": "https://github.com/bentelega"
+        },
+        {
+          "title": "Email",
+          "link": "mailto:email@example.com"
+        }
+      ]
     }
-]
+  }

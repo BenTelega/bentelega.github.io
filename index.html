@@ -11,6 +11,14 @@
     tailwind.config = window.tailwindConfig;
   </script>
 
+  <script>
+    // Конфигурация
+    const CONFIG = {
+      projectsUrl: 'https://raw.githubusercontent.com/BenTelega/bentelega.github.io/main/works.json',
+      settingsUrl: './settings.json'
+    };
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -20,7 +28,7 @@
   <style type="text/tailwindcss">
     @layer components {
       .project-card {
-        @apply bg-primary-light dark:bg-primary-light rounded-lg overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1;
+        @apply bg-light-light dark:bg-light-dark rounded-sm overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-1;
       }
       .project-img-container {
         @apply h-48 w-full bg-gray-300 dark:bg-gray-700 relative overflow-hidden;
@@ -51,8 +59,8 @@
 
   <header class="bg-primary-light dark:bg-primary-dark text-white py-6 text-center">
     <div class="container mx-auto px-5">
-      <h1 class="text-5xl md:text-5xl mb-4 font-normal font-pangolin-regular">BenTelega</h1>
-      <p class="text-3xl font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
+      <h1 class="text-5xl md:text-4xl mb-4 font-bold font-pangolin-regular">@BenTelega</h1>
+      <p class="text-xl font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
     </div>
   </header>
 
@@ -73,18 +81,6 @@
     <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мои навыки
     </h2>
     <div class="flex flex-wrap gap-2">
-      <span class="skill">Python</span>
-      <span class="skill">aiogram</span>
-      <span class="skill">Node.js</span>
-      <span class="skill">Telegraf.js</span>
-      <span class="skill">Django</span>
-      <span class="skill">Flask</span>
-      <span class="skill">PostgreSQL</span>
-      <span class="skill">MongoDB</span>
-      <span class="skill">Redis</span>
-      <span class="skill">Docker</span>
-      <span class="skill">API интеграции</span>
-      <span class="skill">Платежные системы</span>
     </div>
   </section>
 
@@ -94,12 +90,7 @@
     <p class="mb-6">Готов обсудить ваш проект и предложить оптимальное решение. Свяжитесь со мной удобным способом:
     </p>
     <div class="flex justify-center gap-6 mb-8">
-      <a href="https://t.me/bentelega" target="_blank"
-        class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">Telegram</a>
-      <a href="mailto:email@example.com"
-        class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">Email</a>
-      <a href="https://github.com/bentelega" target="_blank"
-        class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">GitHub</a>
+
     </div>
   </section>
 
@@ -110,8 +101,34 @@
   </footer>
 
   <script>
-    // URL для загрузки проектов
-    const PROJECTS_URL = 'https://raw.githubusercontent.com/BenTelega/bentelega.github.io/main/works.json';
+    // Функция для загрузки JSON
+    async function loadJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return await response.json();
+    }
+
+
+    // Функция для обновления профиля
+    function updateProfile(profileData) {
+
+      // Обновляем контакты
+      const contactsContainer = document.querySelector('#contact .flex.justify-center');
+      contactsContainer.innerHTML = profileData.contacts.map(contact => `
+      <a href="${contact.link}" target="_blank" 
+         class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">
+        ${contact.title}
+      </a>
+    `).join('');
+
+
+      // Обновляем навыки
+      const skillsContainer = document.querySelector('.flex.flex-wrap.gap-2');
+      skillsContainer.innerHTML = profileData.skills.map(skill => `
+      <span class="skill">${skill}</span>
+    `).join('');
+    }
+
 
     // Функция для загрузки и отображения проектов
     async function loadProjects() {
@@ -185,11 +202,26 @@
       );
     }
 
-    // Инициализация при загрузке страницы
-    document.addEventListener('DOMContentLoaded', () => {
-      loadProjects();
-      initTheme();
+
+    // Инициализация страницы
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Загружаем настройки и проекты параллельно
+        const [settings, projects] = await Promise.all([
+          loadJson(CONFIG.settingsUrl),
+          loadJson(CONFIG.projectsUrl)
+        ]);
+
+        updateProfile(settings.profile);
+        displayProjects(projects);
+        initTheme();
+      } catch (error) {
+        console.error('Ошибка загрузки данных:', error);
+        // Можно добавить обработку ошибок для пользователя
+      }
     });
+
+
   </script>
 </body>
 
