@@ -10,7 +10,7 @@
         "id": 2,
         "title": "Поддержка клиентов",
         "description": "Бот для обработки обращений клиентов с переадресацией на операторов и системой тикетов.",
-        "image": "https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        "image": "https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
         "tools": ["Node.js", "Telegraf", "MongoDB"]
     },
     {

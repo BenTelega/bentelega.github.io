@@ -10,28 +10,32 @@
   <script>
     tailwind.config = window.tailwindConfig;
   </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Pangolin&family=Roboto+Slab:wght@100..900&display=swap"
+    rel="stylesheet">
+
   <style type="text/tailwindcss">
     @layer components {
-            .project-card {
-                @apply bg-light-light dark:bg-light-dark rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-1;
-            }
-            .project-img-container {
-                @apply h-48 w-full bg-gray-300 dark:bg-gray-700 relative overflow-hidden;
-            }
-            .project-img-overlay {
-                @apply absolute inset-0 bg-gradient-to-br from-primary-light/60 to-primaryDark-light/80 dark:from-primary-dark/60 dark:to-primaryDark-dark/80 mix-blend-multiply transition-opacity duration-300 hover:opacity-80;
-            }
-            .skill {
-                @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
-            }
-            .btn {
-                @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px];
-            }
-        }
-    </style>
+      .project-card {
+        @apply bg-light-light dark:bg-light-dark rounded-sm overflow-hidden shadow-sm transition-transform duration-300 hover:-translate-y-1;
+      }
+      .project-img-container {
+        @apply h-48 w-full bg-gray-300 dark:bg-gray-700 relative overflow-hidden;
+      }
+      .project-img-overlay {
+        @apply absolute inset-0 bg-gradient-to-br from-primary-light/60 to-primaryDark-light/80 dark:from-primary-dark/60 dark:to-primaryDark-dark/80 mix-blend-multiply transition-opacity duration-300 hover:opacity-80;
+      }
+      .skill {
+        @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
+      }
+      .btn {
+        @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px] font-roboto-slab;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-secondary-light dark:bg-secondary-dark text-dark-light dark:text-dark-dark font-sans">
@@ -45,29 +49,17 @@
     </svg>
   </button>
 
-  <header class="bg-primary-light dark:bg-primary-dark text-white py-8 text-center">
+  <header class="bg-primary-light dark:bg-primary-dark text-white py-6 text-center">
     <div class="container mx-auto px-5">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4 font-roboto-slab">BenTelega</h1>
-      <p class="text-lg">Разработчик Telegram ботов</p>
+      <h1 class="text-5xl md:text-5xl mb-4 font-normal font-pangolin-regular">BenTelega</h1>
+      <p class="text-3xl font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
     </div>
   </header>
 
-  <section class="py-12 text-center">
-    <div class="container mx-auto px-5 max-w-4xl">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-primary-light dark:text-primary-dark font-roboto-slab">Обо
-        мне</h2>
-      <p class="text-lg mb-8">
-        Я профессиональный разработчик Telegram ботов с 5-летним опытом. Создаю эффективные, масштабируемые и удобные
-        боты для бизнеса и личного использования.
-      </p>
-      <a href="#contact" class="btn">Связаться со мной</a>
-    </div>
-  </section>
-
-  <section class="container mx-auto px-5 py-8">
-    <h2 class="text-2xl font-semibold mb-8 text-primary-light dark:text-primary-dark font-roboto-slab">Мои проекты</h2>
+  <section class=" container mx-auto px-5 md:px-10 py-12">
+    <h2 class="text-2xl font-semibold mb-8 text-primary-light dark:text-secondary-light font-roboto-slab">Мои проекты
+    </h2>
     <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Карточки проектов будут загружены сюда -->
       <div class="text-center py-8 col-span-full">
         <div
           class="animate-spin inline-block w-8 h-8 border-4 border-primary-light dark:border-primary-dark rounded-full border-t-transparent">
@@ -78,7 +70,8 @@
   </section>
 
   <section class="container mx-auto px-5 py-8">
-    <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-primary-dark font-roboto-slab">Мои навыки</h2>
+    <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мои навыки
+    </h2>
     <div class="flex flex-wrap gap-2">
       <span class="skill">Python</span>
       <span class="skill">aiogram</span>
@@ -96,23 +89,23 @@
   </section>
 
   <section id="contact" class="container mx-auto px-5 py-8">
-    <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-primary-dark font-roboto-slab">Контакты</h2>
-    <p class="mb-6">Готов обсудить ваш проект и предложить оптимальное решение. Свяжитесь со мной удобным способом:</p>
+    <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Контакты
+    </h2>
+    <p class="mb-6">Готов обсудить ваш проект и предложить оптимальное решение. Свяжитесь со мной удобным способом:
+    </p>
     <div class="flex justify-center gap-6 mb-8">
-      <a href="https://t.me/username" target="_blank"
+      <a href="https://t.me/bentelega" target="_blank"
         class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">Telegram</a>
       <a href="mailto:email@example.com"
         class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">Email</a>
-      <a href="https://github.com/username" target="_blank"
+      <a href="https://github.com/bentelega" target="_blank"
         class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">GitHub</a>
-      <a href="https://linkedin.com/in/username" target="_blank"
-        class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">LinkedIn</a>
     </div>
   </section>
 
   <footer class="bg-dark-light dark:bg-dark-dark text-white py-8 text-center mt-10">
     <div class="container mx-auto px-5">
-      <p>&copy; 2023 Иван Иванов - Разработчик Telegram ботов</p>
+      <p>&copy; 2025 BENTELEGA - Разработчик Telegram ботов</p>
     </div>
   </footer>
 
@@ -126,17 +119,11 @@
 
       try {
         const response = await fetch(PROJECTS_URL);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const projects = await response.json();
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-        if (!projects || projects.length === 0) {
-          container.innerHTML = `
-                        <div class="col-span-full text-center py-8">
-                            <p>Нет доступных проектов</p>
-                        </div>
-                    `;
+        const projects = await response.json();
+        if (!projects?.length) {
+          container.innerHTML = '<div class="col-span-full text-center py-8"><p>Нет доступных проектов</p></div>';
           return;
         }
 
@@ -144,82 +131,64 @@
       } catch (error) {
         console.error('Ошибка загрузки проектов:', error);
         container.innerHTML = `
-                    <div class="col-span-full text-center py-8">
-                        <p class="text-red-500">Не удалось загрузить проекты. Пожалуйста, попробуйте позже.</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">${error.message}</p>
-                    </div>
-                `;
+          <div class="col-span-full text-center py-8">
+            <p class="text-red-500">Не удалось загрузить проекты. Пожалуйста, попробуйте позже.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">${error.message}</p>
+          </div>
+        `;
       }
     }
 
     // Функция для отображения проектов
     function displayProjects(projects) {
       const container = document.getElementById('projects-container');
-
       container.innerHTML = projects.map(project => `
-                <div class="project-card">
-                    <div class="project-img-container">
-                        <img src="${project.image}" 
-                             alt="${project.title}" 
-                             class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105">
-                        <div class="project-img-overlay"></div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-medium mb-2 font-roboto-slab">${project.title}</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-3 text-sm">
-                            ${project.description}
-                        </p>
-                        <p class="text-sm mb-3"><strong>Технологии:</strong> ${Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}</p>
-                        <a href="#" class="btn text-sm">Подробнее</a>
-                    </div>
-                </div>
-            `).join('');
+        <div class="project-card">
+          <div class="project-img-container">
+            <img src="${project.image}" 
+                 alt="${project.title}" 
+                 class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-md font-medium mb-2 font-roboto-slab">${project.title}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-3 text-sm">${project.description}</p>
+            <p class="text-sm mb-3"><strong>Технологии:</strong> ${Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}</p>
+            <a href="#" class="btn text-sm">Подробнее</a>
+          </div>
+        </div>
+      `).join('');
     }
 
-    // Функция для проверки темной темы в настройках браузера
-    function checkDarkModePreference() {
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-
-    // Устанавливаем тему на основе предпочтений браузера
-    function setThemeFromPreference() {
-      const isDark = checkDarkModePreference();
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+    // Управление темной темой
+    function initTheme() {
+      const isDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', isDark);
       updateThemeIcon(isDark);
-    }
 
-    // Обновляем иконку темы
-    function updateThemeIcon(isDark) {
-      const themeIconPath = document.getElementById('theme-icon-path');
-      if (isDark) {
-        themeIconPath.setAttribute('d', 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z');
-      } else {
-        themeIconPath.setAttribute('d', 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z');
-      }
-    }
-
-    // Инициализация при загрузке страницы
-    document.addEventListener('DOMContentLoaded', () => {
-      // Загружаем проекты
-      loadProjects();
-
-      // Устанавливаем тему
-      setThemeFromPreference();
-
-      // Обработчик изменения системных предпочтений
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        setThemeFromPreference();
+        document.documentElement.classList.toggle('dark', e.matches);
+        updateThemeIcon(e.matches);
       });
 
-      // Переключение темы по кнопке (временное, без сохранения)
       document.getElementById('theme-toggle').addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         updateThemeIcon(isDark);
       });
+    }
+
+    function updateThemeIcon(isDark) {
+      const path = document.getElementById('theme-icon-path');
+      path.setAttribute('d', isDark
+        ? 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'
+        : 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'
+      );
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProjects();
+      initTheme();
     });
   </script>
 </body>
