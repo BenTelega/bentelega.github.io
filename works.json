@@ -5,5 +5,5 @@
         "description": "Полноценный интернет-магазин с корзиной, оплатой и историей заказов. Интеграция с 1С и CRM.",
         "image": "/static/market.jpg",
         "tools": ["Python", "aiogram", "PostgreSQL"]
-    },
+    }
 ]
