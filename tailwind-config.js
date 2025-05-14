@@ -34,8 +34,3 @@ window.tailwindConfig = {
   },
 };
 
-// .pangolin-regular {
-//     font-family: "Pangolin", cursive;
-//     font-weight: 400;
-//     font-style: normal;
-//   }
