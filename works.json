@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": "Магазин в Telegram",
+        "title": "Витрина товаров или услуг",
         "description": "Полноценный интернет-магазин с корзиной, оплатой и историей заказов. Интеграция с 1С и CRM.",
         "image": "/static/market.jpg",
         "tools": ["Python", "aiogram", "PostgreSQL"]
@@ -13,11 +13,4 @@
         "image": "https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
         "tools": ["Node.js", "Telegraf", "MongoDB"]
     },
-    {
-        "id": 3,
-        "title": "Контент-бот",
-        "description": "Бот для публикации и монетизации контента с подпиской и различными тарифными планами.",
-        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-        "tools": ["Python", "Django", "Redis"]
-    }
 ]
