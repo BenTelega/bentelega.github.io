@@ -1,1 +1,3 @@
 aiogram
+sqlalchemy
+python-dotenv

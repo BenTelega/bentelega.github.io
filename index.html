@@ -54,15 +54,53 @@
                 const user = tg.initDataUnsafe.user;
                 const avatarImg = document.getElementById('user-avatar');
                 const userNameP = document.getElementById('user-name');
+                const profileAvatar = document.getElementById('profile-avatar');
+                const profileName = document.getElementById('profile-name');
 
                 if (user.photo_url) {
                     avatarImg.src = user.photo_url;
                     avatarImg.style.display = 'block';
+                    profileAvatar.src = user.photo_url;
                 }
 
                 const displayName = user.first_name + (user.last_name ? ' ' + user.last_name : '');
                 userNameP.textContent = displayName || user.username || 'Пользователь';
+                profileName.textContent = displayName || user.username || 'Пользователь';
             }
+        }
+
+        // Profile functionality
+        let userBalance = 0;
+
+        document.getElementById('profile-btn').addEventListener('click', () => {
+            document.getElementById('profile-section').classList.remove('hidden');
+            document.getElementById('profile-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('topup-btn').addEventListener('click', () => {
+            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+            // Send topup request to bot
+            const data = {
+                type: 'topup',
+                amount: 100
+            };
+            tg.sendData(JSON.stringify(data));
+        });
+
+        document.getElementById('premium-btn').addEventListener('click', () => {
+            if (userBalance >= 50) {
+                // Show premium projects
+                alert('Доступ к премиум проектам открыт!');
+            } else {
+                alert('Недостаточно средств. Пополните баланс.');
+            }
+        });
+
+        // Update balance (this would come from bot or stored locally)
+        function updateBalance(balance) {
+            userBalance = balance;
+            document.getElementById('profile-balance').textContent = `Баланс: ${balance} ⭐`;
+            document.getElementById('premium-btn').disabled = balance < 50;
         }
 
         tg.onEvent('themeChanged', applyTheme);
@@ -80,6 +118,7 @@
                 </div>
             </div>
             <p class="text-lg font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
+            <button id="profile-btn" class="btn mt-4">Мой профиль</button>
         </div>
     </header>
 
@@ -87,6 +126,23 @@
         <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мои
             проекты</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects"></div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile-section" class="container mx-auto px-5 py-8 hidden">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мой
+            профиль</h2>
+        <div class="bg-light-light dark:bg-light-dark p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+                <img id="profile-avatar" class="w-16 h-16 rounded-full mr-4" alt="Avatar">
+                <div>
+                    <h3 id="profile-name" class="text-xl font-semibold"></h3>
+                    <p id="profile-balance" class="text-lg">Баланс: 0 ⭐</p>
+                </div>
+            </div>
+            <button id="topup-btn" class="btn mr-4">Пополнить баланс</button>
+            <button id="premium-btn" class="btn" disabled>Премиум проекты</button>
+        </div>
     </section>
 
     <section class="container mx-auto px-5 py-8">
@@ -149,11 +205,14 @@
 
         function displayProjects(works) {
             const projectsContainer = document.getElementById('projects');
-            projectsContainer.innerHTML = works.map(work => `
+            const filteredWorks = works.filter(work => !work.premium || userBalance >= (work.cost || 0));
+
+            projectsContainer.innerHTML = filteredWorks.map(work => `
                 <div class="project-card cursor-pointer" onclick="openModal(${work.id})">
                     <img src="${work.image}" alt="${work.title}" class="w-full h-32 object-cover rounded mb-2">
-                    <h3 class="text-lg font-semibold">${work.title}</h3>
+                    <h3 class="text-lg font-semibold">${work.title} ${work.premium ? '⭐' : ''}</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">${work.description || 'Описание скоро...'}</p>
+                    ${work.premium ? `<p class="text-sm font-semibold text-yellow-600">Стоимость: ${work.cost} ⭐</p>` : ''}
                 </div>
             `).join('');
         }
@@ -168,9 +227,41 @@
                     document.getElementById('modal-image').src = work.image;
                     document.getElementById('modal-description').textContent = work.description || 'Описание скоро...';
                     document.getElementById('modal-tools').innerHTML = work.tools.map(tool => `<span class="skill">${tool}</span>`).join('');
-                    document.getElementById('modal').classList.remove('hidden');
+
+                    const closeBtn = document.getElementById('close-modal');
+                    const modal = document.getElementById('modal');
+
+                    // Remove existing buy button
+                    const existingBuyBtn = modal.querySelector('#buy-btn');
+                    if (existingBuyBtn) existingBuyBtn.remove();
+
+                    if (work.premium) {
+                        const buyBtn = document.createElement('button');
+                        buyBtn.id = 'buy-btn';
+                        buyBtn.className = 'btn ml-4';
+                        buyBtn.textContent = `Купить за ${work.cost} ⭐`;
+                        buyBtn.onclick = () => purchaseItem(work);
+                        closeBtn.parentNode.insertBefore(buyBtn, closeBtn);
+                    }
+
+                    modal.classList.remove('hidden');
                 }
             });
+        }
+
+        function purchaseItem(item) {
+            if (userBalance >= item.cost) {
+                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+                const data = {
+                    type: 'purchase',
+                    item: item.title,
+                    cost: item.cost
+                };
+                tg.sendData(JSON.stringify(data));
+                document.getElementById('modal').classList.add('hidden');
+            } else {
+                alert('Недостаточно средств. Пополните баланс.');
+            }
         }
 
         document.getElementById('close-modal').addEventListener('click', () => {

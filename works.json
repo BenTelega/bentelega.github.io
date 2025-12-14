@@ -10,7 +10,7 @@
         "id": 2,
         "title": "Многостраничный сайт",
         "description": "Разработка полнофункциональных многостраничных сайтов с навигацией, формами обратной связи и интеграцией с базами данных.",
-        "image": "/static/market1.jpg",
+        "image": "/static/market.jpg",
         "tools": ["Python", "FastAPI", "PostgreSQL", "HTML", "CSS"]
     },
     {
@@ -19,5 +19,23 @@
         "description": "Создание онлайн-магазинов с каталогом товаров, корзиной покупок, системой оплаты и управлением заказами.",
         "image": "/static/market.jpg",
         "tools": ["Python", "aiogram", "PostgreSQL", "Telegram API"]
+    },
+    {
+        "id": 4,
+        "title": "AI-ассистент для бизнеса",
+        "description": "Интеллектуальный помощник на базе ИИ для автоматизации бизнес-процессов, анализа данных и генерации отчетов.",
+        "image": "/static/bot.png",
+        "tools": ["Python", "OpenAI API", "FastAPI", "PostgreSQL"],
+        "premium": true,
+        "cost": 100
+    },
+    {
+        "id": 5,
+        "title": "Система лояльности",
+        "description": "Комплексная система для управления программой лояльности клиентов с накопительными баллами и персональными предложениями.",
+        "image": "/static/market.png",
+        "tools": ["Node.js", "MongoDB", "React", "Express"],
+        "premium": true,
+        "cost": 150
     }
 ]
