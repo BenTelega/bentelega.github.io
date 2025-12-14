@@ -3,14 +3,14 @@
         "id": 1,
         "title": "Посадочная страница (Лендинг)",
         "description": "Создание эффективных посадочных страниц для привлечения клиентов. Включает адаптивный дизайн, оптимизацию под SEO и интеграцию с системами аналитики.",
-        "image": "/static/market.jpg",
+        "image": "/static/bot.png",
         "tools": ["HTML", "CSS", "JavaScript", "Tailwind CSS"]
     },
     {
         "id": 2,
         "title": "Многостраничный сайт",
         "description": "Разработка полнофункциональных многостраничных сайтов с навигацией, формами обратной связи и интеграцией с базами данных.",
-        "image": "/static/market.jpg",
+        "image": "/static/market1.jpg",
         "tools": ["Python", "FastAPI", "PostgreSQL", "HTML", "CSS"]
     },
     {

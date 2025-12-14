@@ -48,13 +48,37 @@
             document.documentElement.style.setProperty('--tg-text-color', tg.themeParams.text_color || '#000000');
         }
 
+        // Display user info
+        function displayUserInfo() {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                const user = tg.initDataUnsafe.user;
+                const avatarImg = document.getElementById('user-avatar');
+                const userNameP = document.getElementById('user-name');
+
+                if (user.photo_url) {
+                    avatarImg.src = user.photo_url;
+                    avatarImg.style.display = 'block';
+                }
+
+                const displayName = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+                userNameP.textContent = displayName || user.username || 'Пользователь';
+            }
+        }
+
         tg.onEvent('themeChanged', applyTheme);
         applyTheme();
+        displayUserInfo();
     </script>
 
     <header class="bg-primary-light dark:bg-primary-dark text-white py-6 text-center">
         <div class="container mx-auto px-5">
-            <h1 class="text-4xl md:text-3xl mb-4 font-bold font-pangolin-regular">@BenTelega</h1>
+            <div class="flex items-center justify-center mb-4">
+                <img id="user-avatar" class="w-12 h-12 rounded-full mr-4" alt="Avatar" style="display: none;">
+                <div>
+                    <h1 class="text-4xl md:text-3xl font-bold font-pangolin-regular">@BenTelega</h1>
+                    <p id="user-name" class="text-sm opacity-75"></p>
+                </div>
+            </div>
             <p class="text-lg font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
         </div>
     </header>
@@ -62,10 +86,6 @@
     <section class="container mx-auto px-5 py-8">
         <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мои
             проекты</h2>
-        <div class="mb-4">
-            <input type="text" id="search" placeholder="Поиск проектов..."
-                class="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700">
-        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects"></div>
     </section>
 
@@ -118,11 +138,10 @@
         }
 
         // Load and display projects
-        let allWorks = [];
         async function loadProjects() {
             try {
-                allWorks = await loadJson('./works.json');
-                displayProjects(allWorks);
+                const works = await loadJson('./works.json');
+                displayProjects(works);
             } catch (error) {
                 console.error('Ошибка загрузки проектов:', error);
             }
@@ -138,17 +157,6 @@
                 </div>
             `).join('');
         }
-
-        // Search functionality
-        document.getElementById('search').addEventListener('input', function () {
-            const query = this.value.toLowerCase();
-            const filtered = allWorks.filter(work =>
-                work.title.toLowerCase().includes(query) ||
-                work.description.toLowerCase().includes(query) ||
-                work.tools.some(tool => tool.toLowerCase().includes(query))
-            );
-            displayProjects(filtered);
-        });
 
         // Modal functions
         function openModal(id) {
