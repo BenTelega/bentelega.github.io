@@ -2,22 +2,22 @@
     {
         "id": 1,
         "title": "Посадочная страница (Лендинг)",
-        "description": "описание",
+        "description": "Создание эффективных посадочных страниц для привлечения клиентов. Включает адаптивный дизайн, оптимизацию под SEO и интеграцию с системами аналитики.",
         "image": "/static/market.jpg",
-        "tools": ["Python", "aiogram", "PostgreSQL"]
+        "tools": ["HTML", "CSS", "JavaScript", "Tailwind CSS"]
     },
     {
-           "id": 2,
+        "id": 2,
         "title": "Многостраничный сайт",
-        "description": "",
+        "description": "Разработка полнофункциональных многостраничных сайтов с навигацией, формами обратной связи и интеграцией с базами данных.",
         "image": "/static/market.jpg",
-        "tools": ["Python", "aiogram", "PostgreSQL"]
+        "tools": ["Python", "FastAPI", "PostgreSQL", "HTML", "CSS"]
     },
     {
-           "id": 3,
+        "id": 3,
         "title": "Витрина товаров / Магазин",
-        "description": "",
+        "description": "Создание онлайн-магазинов с каталогом товаров, корзиной покупок, системой оплаты и управлением заказами.",
         "image": "/static/market.jpg",
-        "tools": ["Python", "aiogram", "PostgreSQL"]
+        "tools": ["Python", "aiogram", "PostgreSQL", "Telegram API"]
     }
 ]

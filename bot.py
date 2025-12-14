@@ -36,7 +36,9 @@ async def start(message: types.Message):
                 text="Канал", url="https://t.me/bentelega_channel"), InlineKeyboardButton(
                 text="Написать", url="https://t.me/bentelega")],
             [InlineKeyboardButton(
-                text="Посмотреть", web_app=webAppInfo)],
+                text="Посмотреть портфолио", web_app=webAppInfo)],
+            [InlineKeyboardButton(
+                text="О разработчике", url="https://bentelega.ru/developer.html")],
         ]
     )
 

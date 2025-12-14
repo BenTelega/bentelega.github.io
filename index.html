@@ -1,1 +1,195 @@
-index.html
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App - BenTelega</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind-config.js"></script>
+    <script>
+        tailwind.config = window.tailwindConfig;
+    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Pangolin&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @layer components {
+      .skill {
+        @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
+      }
+      .btn {
+        @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px] font-roboto-slab;
+      }
+      .project-card {
+        @apply bg-light-light dark:bg-light-dark p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-secondary-light dark:bg-secondary-dark text-dark-light dark:text-dark-dark font-sans">
+    <!-- Telegram Web App Init -->
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand(); // Expand to full height
+
+        // Apply Telegram theme
+        function applyTheme() {
+            document.body.style.backgroundColor = tg.themeParams.bg_color || '#ffffff';
+            document.body.style.color = tg.themeParams.text_color || '#000000';
+            document.documentElement.style.setProperty('--tg-bg-color', tg.themeParams.bg_color || '#ffffff');
+            document.documentElement.style.setProperty('--tg-text-color', tg.themeParams.text_color || '#000000');
+        }
+
+        tg.onEvent('themeChanged', applyTheme);
+        applyTheme();
+    </script>
+
+    <header class="bg-primary-light dark:bg-primary-dark text-white py-6 text-center">
+        <div class="container mx-auto px-5">
+            <h1 class="text-4xl md:text-3xl mb-4 font-bold font-pangolin-regular">@BenTelega</h1>
+            <p class="text-lg font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-5 py-8">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мои
+            проекты</h2>
+        <div class="mb-4">
+            <input type="text" id="search" placeholder="Поиск проектов..."
+                class="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects"></div>
+    </section>
+
+    <section class="container mx-auto px-5 py-8">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Обратная
+            связь</h2>
+        <form id="feedback-form" class="bg-light-light dark:bg-light-dark p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Имя</label>
+                <input type="text" id="name" class="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Email</label>
+                <input type="email" id="email" class="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Сообщение</label>
+                <textarea id="message" rows="4" class="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700"
+                    required></textarea>
+            </div>
+            <button type="submit" class="btn">Отправить</button>
+        </form>
+    </section>
+
+    <footer class="bg-dark-light dark:bg-dark-dark text-white py-6 text-center">
+        <div class="container mx-auto px-5">
+            <p>&copy; 2025 BENTELEGA - Разработчик Telegram ботов</p>
+        </div>
+    </footer>
+
+    <!-- Modal for project details -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md w-full mx-4">
+            <h3 id="modal-title" class="text-xl font-bold mb-4"></h3>
+            <img id="modal-image" class="w-full h-48 object-cover rounded mb-4" alt="">
+            <p id="modal-description" class="mb-4"></p>
+            <div id="modal-tools" class="flex flex-wrap gap-2 mb-4"></div>
+            <button id="close-modal" class="btn">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        // Load JSON function
+        async function loadJson(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        }
+
+        // Load and display projects
+        let allWorks = [];
+        async function loadProjects() {
+            try {
+                allWorks = await loadJson('./works.json');
+                displayProjects(allWorks);
+            } catch (error) {
+                console.error('Ошибка загрузки проектов:', error);
+            }
+        }
+
+        function displayProjects(works) {
+            const projectsContainer = document.getElementById('projects');
+            projectsContainer.innerHTML = works.map(work => `
+                <div class="project-card cursor-pointer" onclick="openModal(${work.id})">
+                    <img src="${work.image}" alt="${work.title}" class="w-full h-32 object-cover rounded mb-2">
+                    <h3 class="text-lg font-semibold">${work.title}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">${work.description || 'Описание скоро...'}</p>
+                </div>
+            `).join('');
+        }
+
+        // Search functionality
+        document.getElementById('search').addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const filtered = allWorks.filter(work =>
+                work.title.toLowerCase().includes(query) ||
+                work.description.toLowerCase().includes(query) ||
+                work.tools.some(tool => tool.toLowerCase().includes(query))
+            );
+            displayProjects(filtered);
+        });
+
+        // Modal functions
+        function openModal(id) {
+            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+            loadJson('./works.json').then(works => {
+                const work = works.find(w => w.id === id);
+                if (work) {
+                    document.getElementById('modal-title').textContent = work.title;
+                    document.getElementById('modal-image').src = work.image;
+                    document.getElementById('modal-description').textContent = work.description || 'Описание скоро...';
+                    document.getElementById('modal-tools').innerHTML = work.tools.map(tool => `<span class="skill">${tool}</span>`).join('');
+                    document.getElementById('modal').classList.remove('hidden');
+                }
+            });
+        }
+
+        document.getElementById('close-modal').addEventListener('click', () => {
+            document.getElementById('modal').classList.add('hidden');
+        });
+
+        // Feedback form
+        document.getElementById('feedback-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const data = {
+                title: `Обратная связь от ${name}`,
+                text: `Email: ${email}\n\n${message}`
+            };
+
+            tg.sendData(JSON.stringify(data));
+            tg.close();
+        });
+
+        // Init
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+
+</body>
+
+</html>

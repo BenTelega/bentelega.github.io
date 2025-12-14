@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О разработчике - BenTelega</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind-config.js"></script>
+    <script>
+        tailwind.config = window.tailwindConfig;
+    </script>
+
+    <script>
+        // Конфигурация
+        const CONFIG = {
+            settingsUrl: './settings.json'
+        };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Pangolin&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @layer components {
+      .skill {
+        @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
+      }
+      .btn {
+        @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px] font-roboto-slab;
+      }
+      .experience-item {
+        @apply bg-light-light dark:bg-light-dark p-4 rounded-lg shadow-md;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-secondary-light dark:bg-secondary-dark text-dark-light dark:text-dark-dark font-sans">
+    <!-- Кнопка переключения темы -->
+    <button id="theme-toggle"
+        class="fixed top-4 right-4 z-50 p-2 rounded-full bg-light-light dark:bg-light-dark shadow-lg">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-gray-200"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path id="theme-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+    </button>
+
+    <header class="bg-primary-light dark:bg-primary-dark text-white py-6 text-center">
+        <div class="container mx-auto px-5">
+            <h1 class="text-5xl md:text-4xl mb-4 font-bold font-pangolin-regular">@BenTelega</h1>
+            <p class="text-xl font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
+            <a href="index.html" class="btn mt-4">Назад к портфолио</a>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-5 py-12">
+        <h2 class="text-2xl font-semibold mb-8 text-primary-light dark:text-secondary-light font-roboto-slab">Обо мне
+        </h2>
+        <div id="bio" class="text-lg leading-relaxed mb-8"></div>
+    </section>
+
+    <section class="container mx-auto px-5 py-8">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Опыт
+            работы</h2>
+        <div id="experience" class="space-y-4"></div>
+    </section>
+
+    <section class="container mx-auto px-5 py-8">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Мои навыки
+        </h2>
+        <div class="flex flex-wrap gap-2" id="skills"></div>
+    </section>
+
+    <section id="contact" class="container mx-auto px-5 py-8">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-light dark:text-secondary-light font-roboto-slab">Контакты
+        </h2>
+        <p class="mb-6">Готов обсудить ваш проект и предложить оптимальное решение. Свяжитесь со мной удобным способом:
+        </p>
+        <div class="flex justify-center gap-6 mb-8" id="contacts"></div>
+    </section>
+
+    <footer class="bg-dark-light dark:bg-dark-dark text-white py-8 text-center mt-10">
+        <div class="container mx-auto px-5">
+            <p>&copy; 2025 BENTELEGA - Разработчик Telegram ботов</p>
+        </div>
+    </footer>
+
+    <script>
+        // Функция для загрузки JSON
+        async function loadJson(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        }
+
+        // Функция для обновления профиля
+        function updateProfile(profileData) {
+            // Биография
+            document.getElementById('bio').textContent = profileData.bio;
+
+            // Опыт
+            const experienceContainer = document.getElementById('experience');
+            experienceContainer.innerHTML = profileData.experience.map(exp => `
+        <div class="experience-item">
+          <p>${exp}</p>
+        </div>
+      `).join('');
+
+            // Навыки
+            const skillsContainer = document.getElementById('skills');
+            skillsContainer.innerHTML = profileData.skills.map(skill => `
+        <span class="skill">${skill}</span>
+      `).join('');
+
+            // Контакты
+            const contactsContainer = document.getElementById('contacts');
+            contactsContainer.innerHTML = profileData.contacts.map(contact => `
+        <a href="${contact.link}" target="_blank" 
+           class="text-dark-light dark:text-dark-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors">
+          ${contact.title}
+        </a>
+      `).join('');
+        }
+
+        // Управление темной темой
+        function initTheme() {
+            const isDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.toggle('dark', isDark);
+            updateThemeIcon(isDark);
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                document.documentElement.classList.toggle('dark', e.matches);
+                updateThemeIcon(e.matches);
+            });
+
+            document.getElementById('theme-toggle').addEventListener('click', () => {
+                const isDark = document.documentElement.classList.toggle('dark');
+                updateThemeIcon(isDark);
+            });
+        }
+
+        function updateThemeIcon(isDark) {
+            const path = document.getElementById('theme-icon-path');
+            path.setAttribute('d', isDark
+                ? 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'
+                : 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'
+            );
+        }
+
+        // Инициализация страницы
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const settings = await loadJson(CONFIG.settingsUrl);
+                updateProfile(settings.profile);
+                initTheme();
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

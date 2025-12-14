@@ -1,5 +1,12 @@
 {
     "profile": {
+      "bio": "Привет! Я BenTelega, разработчик Telegram ботов и веб-приложений. Специализируюсь на создании решений для бизнеса в Telegram: от простых ботов до сложных e-commerce платформ. Опыт работы более 3 лет, реализовал десятки проектов.",
+      "experience": [
+        "Разработка Telegram ботов с использованием aiogram и Telegraf",
+        "Создание веб-приложений на Python с FastAPI",
+        "Интеграция с базами данных (MongoDB, PostgreSQL)",
+        "Разработка фронтенда с HTML, CSS, JavaScript"
+      ],
       "skills": ["Python", "Aiogram", "Node.js", "Telegraf", "MongoDB", "FastAPI"],
       "contacts": [
         {
