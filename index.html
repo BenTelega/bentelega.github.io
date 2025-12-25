@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Web App - BenTelega</title>
+    <title>BenTelega - Разработчик Telegram ботов и веб приложений</title>
+    <meta name="description" content="Профессиональная разработка Telegram ботов и веб приложений. Создание современных, производительных и доступных решений.">
+    <meta name="keywords" content="Telegram боты, веб приложения, разработка, программирование, BenTelega">
+    <meta name="author" content="BenTelega">
+    <meta property="og:title" content="BenTelega - Разработчик Telegram ботов и веб приложений">
+    <meta property="og:description" content="Профессиональная разработка Telegram ботов и веб приложений.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bentelega.github.io">
+    <meta property="og:image" content="./static/bot.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BenTelega - Разработчик Telegram ботов и веб приложений">
+    <meta name="twitter:description" content="Профессиональная разработка Telegram ботов и веб приложений.">
+    <meta name="twitter:image" content="./static/bot.png">
+    <link rel="canonical" href="https://bentelega.github.io">
+    <link rel="icon" type="image/x-icon" href="./static/bot.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./tailwind-config.js"></script>
     <script>
@@ -19,18 +33,44 @@
         rel="stylesheet">
 
     <style type="text/tailwindcss">
+        @layer base {
+            * {
+                scroll-behavior: smooth;
+            }
+        }
+
         @layer components {
-      .skill {
-        @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm;
-      }
-      .btn {
-        @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px] font-roboto-slab;
-      }
-      .project-card {
-        @apply bg-light-light dark:bg-light-dark p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow;
-      }
-    }
-  </style>
+            .skill {
+                @apply bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full text-sm transition-all duration-300 hover:scale-105;
+            }
+            .btn {
+                @apply inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md font-medium transition-all duration-300 hover:bg-primaryDark-light dark:hover:bg-primaryDark-dark hover:translate-y-[-2px] font-roboto-slab focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50;
+            }
+            .project-card {
+                @apply bg-light-light dark:bg-light-dark p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer;
+            }
+            .nav-link {
+                @apply text-white hover:text-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md px-2 py-1;
+            }
+            .fade-in {
+                @apply opacity-0 transform translate-y-4 transition-all duration-700;
+            }
+            .fade-in.visible {
+                @apply opacity-100 transform translate-y-0;
+            }
+            .stagger-1 { transition-delay: 0.1s; }
+            .stagger-2 { transition-delay: 0.2s; }
+            .stagger-3 { transition-delay: 0.3s; }
+            .stagger-4 { transition-delay: 0.4s; }
+            .stagger-5 { transition-delay: 0.5s; }
+        }
+
+        @layer utilities {
+            .text-balance {
+                text-wrap: balance;
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-secondary-light dark:bg-secondary-dark text-dark-light dark:text-dark-dark font-sans">
@@ -108,26 +148,142 @@
         displayUserInfo();
     </script>
 
-    <header class="bg-primary-light dark:bg-primary-dark text-white py-6 text-center">
+    <header class="bg-primary-light dark:bg-primary-dark text-white py-6">
         <div class="container mx-auto px-5">
-            <div class="flex items-center justify-center mb-4">
-                <img id="user-avatar" class="w-12 h-12 rounded-full mr-4" alt="Avatar" style="display: none;">
-                <div>
-                    <h1 class="text-4xl md:text-3xl font-bold font-pangolin-regular">@BenTelega</h1>
-                    <p id="user-name" class="text-sm opacity-75"></p>
+            <nav class="flex flex-wrap items-center justify-between mb-6 fade-in" role="navigation" aria-label="Основная навигация">
+                <div class="flex items-center space-x-4">
+                    <button id="profile-btn" class="nav-link" aria-label="Открыть профиль">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </button>
+                    <button id="projects-btn" class="nav-link" aria-label="Просмотреть проекты">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </button>
                 </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#contact" class="nav-link">Контакты</a>
+                    <a href="#about" class="nav-link">Обо мне</a>
+                </div>
+            </nav>
+            
+            <div class="text-center fade-in stagger-1">
+                <div class="flex items-center justify-center mb-4">
+                    <img id="user-avatar" class="w-12 h-12 rounded-full mr-4" alt="Аватар пользователя" style="display: none;">
+                    <div>
+                        <h1 class="text-4xl md:text-3xl font-bold font-pangolin-regular">@BenTelega</h1>
+                        <p id="user-name" class="text-sm opacity-75"></p>
+                    </div>
+                </div>
+                <p class="text-lg font-pangolin-regular text-balance">Разработчик Telegram ботов и веб приложений</p>
             </div>
-            <p class="text-lg font-pangolin-regular">Разработчик Telegram ботов и веб приложений</p>
         </div>
     </header>
 
 
 
-    <!-- <footer class="bg-dark-light dark:bg-dark-dark text-white py-6 text-center">
+    <main class="min-h-screen">
+        <section id="about" class="py-16 bg-white dark:bg-gray-800 fade-in">
+            <div class="container mx-auto px-5">
+                <h2 class="text-3xl font-bold text-center mb-8 font-roboto-slab">Обо мне</h2>
+                <div class="max-w-3xl mx-auto text-center">
+                    <p class="text-lg mb-6 text-balance">
+                        Я профессиональный разработчик Telegram ботов и веб приложений с опытом создания современных, производительных и доступных решений. Специализируюсь на создании интуитивных пользовательских интерфейсов и эффективной backend-логики.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div class="bg-light-light dark:bg-light-dark p-6 rounded-lg shadow-md fade-in stagger-1">
+                            <div class="text-4xl mb-4">🚀</div>
+                            <h3 class="text-xl font-semibold mb-2">Современные технологии</h3>
+                            <p class="text-sm">Использую последние технологии для создания быстрых и надежных приложений</p>
+                        </div>
+                        <div class="bg-light-light dark:bg-light-dark p-6 rounded-lg shadow-md fade-in stagger-2">
+                            <div class="text-4xl mb-4">📱</div>
+                            <h3 class="text-xl font-semibold mb-2">Адаптивный дизайн</h3>
+                            <p class="text-sm">Приложения отлично выглядят на всех устройствах и размерах экранов</p>
+                        </div>
+                        <div class="bg-light-light dark:bg-light-dark p-6 rounded-lg shadow-md fade-in stagger-3">
+                            <div class="text-4xl mb-4">⚡</div>
+                            <h3 class="text-xl font-semibold mb-2">Оптимизация</h3>
+                            <p class="text-sm">Фокус на производительности и скорости загрузки для лучшего опыта</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects-section" class="py-16 bg-gray-50 dark:bg-gray-900 fade-in">
+            <div class="container mx-auto px-5">
+                <h2 class="text-3xl font-bold text-center mb-8 font-roboto-slab">Мои проекты</h2>
+                <div id="projects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Projects will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 bg-white dark:bg-gray-800 fade-in">
+            <div class="container mx-auto px-5">
+                <h2 class="text-3xl font-bold text-center mb-8 font-roboto-slab">Свяжитесь со мной</h2>
+                <div class="max-w-2xl mx-auto">
+                    <form id="feedback-form" class="space-y-6">
+                        <div class="fade-in stagger-1">
+                            <label for="name" class="block text-sm font-medium mb-2">Имя</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-light focus:border-transparent bg-white dark:bg-gray-700 text-dark-light dark:text-dark-dark"
+                                aria-label="Ваше имя">
+                        </div>
+                        <div class="fade-in stagger-2">
+                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-light focus:border-transparent bg-white dark:bg-gray-700 text-dark-light dark:text-dark-dark"
+                                aria-label="Ваш email">
+                        </div>
+                        <div class="fade-in stagger-3">
+                            <label for="message" class="block text-sm font-medium mb-2">Сообщение</label>
+                            <textarea id="message" name="message" rows="5" required
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-light focus:border-transparent bg-white dark:bg-gray-700 text-dark-light dark:text-dark-dark resize-none"
+                                aria-label="Текст сообщения"></textarea>
+                        </div>
+                        <div class="text-center fade-in stagger-4">
+                            <button type="submit" class="btn px-8 py-3 text-lg">
+                                Отправить сообщение
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark-light dark:bg-dark-dark text-white py-12 fade-in">
         <div class="container mx-auto px-5">
-            <p>&copy; 2025 BENTELEGA - Разработчик Telegram ботов</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-xl font-bold mb-4 font-roboto-slab">BenTelega</h3>
+                    <p class="text-sm opacity-75">Разработчик Telegram ботов и веб приложений</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-lg font-semibold mb-4">Навигация</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-sm opacity-75 hover:opacity-100 transition-opacity">Обо мне</a></li>
+                        <li><a href="#projects-section" class="text-sm opacity-75 hover:opacity-100 transition-opacity">Проекты</a></li>
+                        <li><a href="#contact" class="text-sm opacity-75 hover:opacity-100 transition-opacity">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <h4 class="text-lg font-semibold mb-4">Контакты</h4>
+                    <div class="space-y-2 text-sm opacity-75">
+                        <p>Telegram: @BenTelega</p>
+                        <p>Email: bentelega@example.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 pt-8 text-center">
+                <p>&copy; 2025 BENTELEGA - Разработчик Telegram ботов. Все права защищены.</p>
+            </div>
         </div>
-    </footer> -->
+    </footer>
 
 
 
