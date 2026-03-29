@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Портфолио разработчика — навыки и опыт работы" />
+    <title>bentelega — Портфолио</title>
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar">
+      <div class="container nav-container">
+        <a href="#" class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">bentelega</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link">Главная</a></li>
+          <li><a href="#about" class="nav-link">Обо мне</a></li>
+          <li><a href="#skills" class="nav-link">Навыки</a></li>
+          <li><a href="#contact" class="nav-link nav-cta">Контакты</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Герой секция -->
+    <section class="hero" id="home">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-intro">
+            <span class="hero-greeting">Привет, я</span>
+            <h1 class="hero-title">
+              <span class="title-main">bentelega</span>
+              <span class="title-sub">Разработчик ботов и приложений</span>
+            </h1>
+          </div>
+          <p class="hero-description">
+            Создаю современные веб-приложения, Telegram-ботов и автоматизирую процессы. 
+            Превращаю идеи в работающий код.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Связаться</a>
+            <a href="#skills" class="btn btn-secondary">Навыки</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="code-terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="terminal-title">developer.json</span>
+            </div>
+            <div class="terminal-body">
+              <pre><code><span class="line"><span class="keyword">const</span> <span class="variable">developer</span> = {</span>
+<span class="line">  <span class="key">name</span>: <span class="string">"bentelega"</span>,</span>
+<span class="line">  <span class="key">role</span>: <span class="string">"Fullstack Developer"</span>,</span>
+<span class="line">  <span class="key">location</span>: <span class="string">"Remote"</span>,</span>
+<span class="line">  <span class="key">skills</span>: [<span class="string">"Python"</span>, <span class="string">"JavaScript"</span>, <span class="string">"React"</span>],</span>
+<span class="line">  <span class="key">available</span>: <span class="boolean">true</span></span>
+<span class="line">};</span></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Листайте вниз</span>
+        <div class="scroll-icon"></div>
+      </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section class="section about" id="about">
+      <div class="container">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Я увлечённый разработчик с опытом создания веб-приложений и ботов. 
+              Моя страсть — решать сложные задачи простыми и элегантными решениями.
+            </p>
+            <p>
+              Работаю с современными технологиями, следую лучшим практикам 
+              и постоянно учусь новому. Всегда открыт к интересным проектам 
+              и сотрудничеству.
+            </p>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Лет опыта</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Проектов</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Клиентов</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-visual">
+            <div class="avatar-circle">
+              <div class="avatar-inner">
+                <span class="avatar-emoji">👨‍💻</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Навыки -->
+    <section class="section skills" id="skills">
+      <div class="container">
+        <h2 class="section-title">Навыки</h2>
+        <div class="skills-showcase">
+          <div class="skill-category">
+            <h3 class="category-title">Frontend</h3>
+            <div class="tags-container">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title">Backend</h3>
+            <div class="tags-container">
+              <span class="tag">Python</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Express</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Redis</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title">Боты</h3>
+            <div class="tags-container">
+              <span class="tag">Telegram Bot API</span>
+              <span class="tag">aiogram</span>
+              <span class="tag">python-telegram-bot</span>
+              <span class="tag">Discord.py</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title">Инструменты</h3>
+            <div class="tags-container">
+              <span class="tag">Git</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Linux</span>
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">Vercel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <h2 class="section-title">Связаться</h2>
+        <div class="contact-card">
+          <p class="contact-intro">
+            Открыт для предложений и сотрудничества. 
+            Напишите мне в любой удобный мессенджер!
+          </p>
+          <div class="contact-links">
+            <a href="mailto:contact@bentelega.github.io" class="contact-link">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span class="link-text">contact@bentelega.github.io</span>
+            </a>
+            <a href="https://t.me/bentelega" class="contact-link">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.054 5.56-5.022c.242-.213-.054-.334-.373-.121l-6.868 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+              <span class="link-text">@bentelega</span>
+            </a>
+            <a href="https://github.com/bentelega" class="contact-link">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-6.27 0-1.38.495-2.535 1.305-3.435-.255-.405-.57-1.29.12-2.67 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.69 1.38.375 2.265.12 2.67.81.9 1.305 2.055 1.305 3.435 0 4.95-2.805 5.97-5.475 6.27.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span class="link-text">bentelega</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <p class="copyright">© 2026 bentelega. Все права защищены.</p>
+          <div class="footer-links">
+            <a href="#home" class="footer-link">Наверх</a>
+            <a href="../index.html" class="footer-link">Главная</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

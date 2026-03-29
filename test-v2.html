@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio V2 Test</title>
+    <link rel="stylesheet" href="portfolio-v2/css/styles.css">
+    <style>
+        body {
+            background: #0A0A1A;
+            color: #F8F8FF;
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 2rem;
+            text-align: center;
+        }
+        .test-box {
+            background: rgba(10, 10, 26, 0.5);
+            border: 1px solid #2A2A4A;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .btn-test {
+            background: #00FFD1;
+            color: #0A0A1A;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .btn-test:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 209, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Portfolio V2 Test</h1>
+        <p style="color: #8888AA; margin-bottom: 2rem;">Testing the new cyberpunk design system</p>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-test" onclick="alert('Primary button works!')">Primary Button</button>
+            <button class="btn-test" style="background: #FF00AA;" onclick="alert('Secondary button works!')">Secondary Button</button>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(50, 50, 80, 0.3); border-radius: 8px; border: 1px solid #2A2A4A;">
+            <code style="font-family: monospace; color: #00FFD1;">CSS & JS loaded successfully ✨</code>
+        </div>
+    </div>
+    
+    <script src="portfolio-v2/js/script.js"></script>
+    <script>
+        console.log('Test page loaded successfully!');
+        console.log('CSS variables:', getComputedStyle(document.documentElement).getPropertyValue('--color-primary'));
+    </script>
+</body>
+</html>
