@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Screenshot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #090615;
+            color: #C4CBBD;
+            padding: 20px;
+            text-align: center;
+        }
+        .screenshot-container {
+            background: #1a1625;
+            border: 1px solid #383358;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #383358, #E6655B);
+            height: 400px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .info {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .info h3 {
+            color: #E6655B;
+            margin-bottom: 10px;
+        }
+        .info p {
+            color: #8a9180;
+            margin-bottom: 8px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #E6655B, #c94f45);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 101, 91, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="screenshot-container">
+        <div class="screenshot-placeholder">
+            bentelega.github.io
+        </div>
+        <div class="info">
+            <h3>Portfolio Screenshot</h3>
+            <p>Modern developer portfolio with dark theme</p>
+            <p>Features: Responsive design, animations, skill showcase</p>
+            <p>Technologies: HTML5, CSS3, JavaScript</p>
+        </div>
+        <button class="btn" onclick="downloadScreenshot()">Download Screenshot</button>
+    </div>
+    
+    <script>
+        function downloadScreenshot() {
+            // This is a placeholder - in a real scenario, you would use html2canvas
+            // For now, we'll just show an alert
+            alert('Screenshot generation would happen here with html2canvas');
+            
+            // Create a simple download link for the placeholder image
+            const link = document.createElement('a');
+            link.href = 'static/images/portfolio-screenshot.png';
+            link.download = 'portfolio-screenshot.png';
+            link.click();
+        }
+    </script>
+</body>
+</html>
