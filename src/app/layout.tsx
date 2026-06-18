@@ -41,7 +41,7 @@ export default function RootLayout({
             <Link href="/" className="text-lg font-bold tracking-tight">
               BenTelega
             </Link>
-            <ul className="flex gap-6 text-sm font-medium">
+            <ul className="flex gap-4 text-sm font-medium max-sm:gap-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link

@@ -62,8 +62,7 @@ export default function ContactPage() {
         </p>
         <form
           action="mailto:reload.benjamin@gmail.com"
-          method="GET"
-          encType="text/plain"
+          method="POST"
           className="mt-5 space-y-4"
         >
           <div>

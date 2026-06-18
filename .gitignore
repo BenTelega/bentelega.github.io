@@ -17,6 +17,8 @@ node_modules/
 # Build output
 build/
 dist/
+.next/
+out/
 
 # Logs
 tmp/

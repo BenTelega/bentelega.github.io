@@ -5,14 +5,14 @@ export default function Home() {
     <div className="flex flex-col gap-12">
       {/* Hero */}
       <section className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
           BenTelega <span className="text-zinc-400">⚡</span>
         </h1>
         <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
           Разработчик Telegram-ботов и AI-агентов. Создаю автоматизацию,
           интеграции и интеллектуальные сервисы на Python &amp; TypeScript.
         </p>
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-3 pt-2 max-sm:flex-col max-sm:gap-2">
           <Link
             href="/projects"
             className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
