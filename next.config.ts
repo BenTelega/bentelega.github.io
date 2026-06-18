@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
 
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/,
+});
+
 const nextConfig: NextConfig = {
-  output: "export",          // Static HTML export for GitHub Pages
-  //basePath: ".",    // GitHub Pages project site path
-  images: { unoptimized: true }, // GitHub Pages doesn't support Next.js image optimization
-  trailingSlash: true,       // Better compatibility with static hosting
+  output: "export",
+  images: { unoptimized: true },
+  trailingSlash: true,
+  pageExtensions: ["ts", "tsx", "md", "mdx"],
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);

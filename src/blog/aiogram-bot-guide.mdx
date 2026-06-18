@@ -1,0 +1,76 @@
+# Сборка Telegram-бота на Aiogram 3.x
+
+Пошаговое руководство по настройке Telegram-бота на Aiogram 3.x для продакшена.
+
+## Настройка webhook
+
+```python
+from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
+
+bot = Bot(
+    token="YOUR_TOKEN",
+    default=DefaultBotProperties(parse_mode=ParseMode.HTML),
+)
+dp = Dispatcher()
+
+# Установка webhook
+await bot.set_webhook(url="https://your-domain.com/webhook")
+```
+
+## Middleware
+
+Middleware позволяют перехватывать и модифицировать входящие обновления:
+
+```python
+from aiogram import BaseMiddleware
+from typing import Callable, Dict, Any, Awaitable
+from aiogram.types import TelegramObject
+
+class LoggingMiddleware(BaseMiddleware):
+    async def __call__(
+        self,
+        handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
+        event: TelegramObject,
+        data: Dict[str, Any]
+    ) -> Any:
+        print(f"Получен апдейт: {event}")
+        return await handler(event, data)
+```
+
+## FSM (Finite State Machine)
+
+```python
+from aiogram.fsm.state import State, StatesGroup
+
+class OrderStates(StatesGroup):
+    waiting_for_name = State()
+    waiting_for_address = State()
+    waiting_for_payment = State()
+```
+
+## Redis + Docker Compose
+
+Для продакшена используйте Redis как хранилище FSM и Docker Compose для оркестрации:
+
+```yaml
+version: "3.8"
+
+services:
+  bot:
+    build: .
+    env_file: .env
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+```
+
+## Итог
+
+Стек Aiogram + Redis + Docker даёт надёжную основу для Telegram-бота любого масштаба.

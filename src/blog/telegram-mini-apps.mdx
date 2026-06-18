@@ -1,0 +1,64 @@
+# Telegram Mini Apps: от идеи до запуска
+
+Полный цикл создания Telegram Web App — от конфигурации бота до публикации.
+
+## Настройка бота
+
+Первым делом зарегистрируйте Web App у BotFather:
+
+```
+/setdomain — укажите домен вашего приложения
+```
+
+Mini App запускается по кнопке в боте:
+
+```typescript
+import { Bot, InlineKeyboard } from "grammy";
+
+const keyboard = new InlineKeyboard().webApp(
+  "Открыть магазин",
+  "https://your-app.com"
+);
+```
+
+## Работа с Telegram WebApp API
+
+После открытия Mini App вызывается метод `expand()`:
+
+```typescript
+declare const Telegram: any;
+const tg = Telegram.WebApp;
+tg.expand(); // На весь экран
+
+// Получить данные пользователя
+const user = tg.initDataUnsafe.user;
+```
+
+## Telegram Payments API
+
+```typescript
+const invoice = {
+  title: "Товар",
+  description: "Описание товара",
+  payload: "order-123",
+  currency: "XTR", // Telegram Stars
+  prices: [{ label: "Товар", amount: 5 }],
+};
+
+tg.openInvoice(JSON.stringify(invoice), (status) => {
+  if (status === "paid") {
+    // Отправить подтверждение боту
+  }
+});
+```
+
+## Деплой
+
+1. Соберите статику (Vite / Next.js export)
+2. Залейте на хостинг (Vercel, Netlify, GitHub Pages)
+3. Укажите домен у BotFather
+4. Проверьте через `https://t.me/your_bot/app`
+
+## Итог
+
+Telegram Mini Apps открывают доступ к нативным возможностям: геолокация, платежи, контакты — всё через обычное веб-приложение.

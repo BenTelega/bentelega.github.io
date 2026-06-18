@@ -1,0 +1,50 @@
+# OpenRouter: универсальный шлюз для LLM
+
+Обзор OpenRouter как единого API для десятков LLM-моделей.
+
+## Что такое OpenRouter
+
+OpenRouter — это прокси-сервис, который предоставляет единый API для 100+ LLM-моделей от разных провайдеров (OpenAI, Anthropic, Google, Meta, Mistral и других).
+
+## Единый API
+
+```python
+import requests
+
+response = requests.post(
+    "https://openrouter.ai/api/v1/chat/completions",
+    headers={
+        "Authorization": "Bearer YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "model": "openai/gpt-4o",
+        "messages": [{"role": "user", "content": "Hello!"}],
+    },
+)
+```
+
+## Fallback-стратегия
+
+```python
+models = ["openai/gpt-4o", "anthropic/claude-3.5-haiku", "google/gemini-2.0-flash"]
+
+for model in models:
+    try:
+        response = call_openrouter(model, messages)
+        return response
+    except Exception:
+        continue  # Пробуем следующую модель
+```
+
+## Мониторинг расходов
+
+OpenRouter предоставляет статистику по каждому запросу: модель, провайдер, стоимость, задержка. Можно настроить лимиты и алерты.
+
+## Кэширование
+
+Для повторяющихся запросов OpenRouter поддерживает кэширование — ответы из кэша стоят дешевле.
+
+## Итог
+
+OpenRouter — must-have инструмент для работы с LLM: один API, десятки моделей, автоматический fallback, прозрачная статистика.

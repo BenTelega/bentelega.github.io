@@ -1,0 +1,64 @@
+# Hermes Agent: настройка своего AI-агента в терминале
+
+Установка и конфигурация Hermes Agent — полный гайд для начинающих.
+
+## Установка
+
+```bash
+npm install -g @earendil-works/pi-coding-agent
+```
+
+Или через Homebrew:
+
+```bash
+brew install hermes-agent
+```
+
+## Провайдеры
+
+Hermes поддерживает多个 провайдеров:
+
+```toml
+[provider.openai]
+api_key = "sk-..."  # Или через OPENAI_API_KEY
+model = "gpt-4o"
+
+[provider.openrouter]
+api_key = "sk-or-..."
+model = "anthropic/claude-3.5-sonnet"
+```
+
+## Skills (навыки)
+
+Навыки — это инструкции для агента. Они хранятся в `~/.hermes/skills/`:
+
+```markdown
+# SKILL.md
+
+Ты — эксперт по PostgreSQL. Когда пользователь задаёт вопрос о SQL,
+отвечай с explain и примером.
+```
+
+## Cron и автоматизация
+
+```toml
+[cron.cleanup]
+schedule = "0 3 * * *"
+command = "cleanup-logs"
+```
+
+## Плагины
+
+```javascript
+// my-plugin.js
+module.exports = {
+  name: "my-plugin",
+  hooks: {
+    beforeCommand: (cmd) => console.log(`Executing: ${cmd}`),
+  },
+};
+```
+
+## Итог
+
+Hermes Agent — гибкий инструмент для автоматизации. Skills и плагины позволяют адаптировать агента под любые задачи, а cron — запускать их по расписанию.
